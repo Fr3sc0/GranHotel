@@ -1,5 +1,5 @@
 
-package granhotel;
+package Entidades;
 
 
 public class GranHotel {
