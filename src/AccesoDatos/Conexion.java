@@ -13,8 +13,7 @@ public class Conexion {
     private static final String PASSWORD = "";
     private static Connection connection;
 
-    private Conexion() {
-    }
+    private Conexion(){}
 
     public static Connection getConexion() {
         if (connection == null) {
