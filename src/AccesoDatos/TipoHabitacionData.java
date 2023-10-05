@@ -7,8 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JOptionPane;
 
 public class TipoHabitacionData {
@@ -18,25 +16,65 @@ public class TipoHabitacionData {
 
     public TipoHabitacionData() {
         con = Conexion.getConexion();
-    }
+    } 
     
-    
-}
-
-public void agregarTipoabitacion 
-        String sql = "INSERT INTO inscripcion(idAlumno, idMateria, nota) VALUES (?,?,?)";
+public void agregarTipoabitacion(TipoHabitacion th){ 
+        String sql = "INSERT INTO tipohabitacion(codigo, cantPersonas, cantCamas, tipoCama ,precioNoche) VALUES (?,?,?,?,?)";
         try {
             PreparedStatement ps= con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, insc.getAlumno().getIdAlumno());
-            ps.setInt(2, insc.getMateria().getIdMateria());
-            ps.setDouble(3, insc.getNota());
+            ps.setString(1, th.getCodigo());
+            ps.setInt(2, th.getCantPersonas());
+            ps.setInt(3, th.getCantCamas());
+            ps.setString(4, th.getTipoCama());
+            ps.setDouble(5,th.getPrecioNoche());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
-                insc.setIdInscripcion(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Inscripcion registrada.");
+                
+                JOptionPane.showMessageDialog(null, "Se a agregado un tipo habitacion");
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla inscripcion.");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla tipo de habitacion.");
+        }        
+    }
+
+public void modificarTh(TipoHabitacion th){
+        String sql= "UPDATE tipohabitacion SET cantPersonas = ?,cantCamas = ?,tipoCama = ?,precioNoche =?  WHERE código =?";
+        
+        try {
+            PreparedStatement ps= con.prepareStatement(sql);
+            ps.setInt(1, th.getCantPersonas());
+            ps.setInt(2, th.getCantCamas());
+            ps.setString(3, th.getTipoCama());
+            ps.setDouble(4,th.getPrecioNoche());
+            int filas = ps.executeUpdate();
+            if (filas>0) {
+               JOptionPane.showMessageDialog(null, "Se ha modificado el tipo de habitacion correctamente.");
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla tipo de habitacion.");
         }
+    }
+
+public void borrarInscripcion (String codigo){
+        String sql = "DELETE FROM tipohabitacion WHERE codigo = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, codigo);            
+            int filas= ps.executeUpdate();
+            if (filas>0) {
+            JOptionPane.showMessageDialog(null, "Se ha eliminado correctamente.");
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Tipo habitacion.");
+        }
+        
+        
+    }
+
+}
+
+
+
