@@ -20,19 +20,19 @@ public class ReservaData {
          con = Conexion.getConexion();
          
      }
-     public void crearReserva (Huesped Hues, Habitacion habitacion, Reserva Reser){
+     public void crearReserva (Reserva Reser){
          String sql = "INSERT INTO reserva(huesped, tipoHabitacion, cantPersonas, fechaEntrada, fechaSalida, importeTotal, estado)VALUES (?,?,?,?,?,?,?)";
          
          try {
              PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-             ps.setInt(1, Hues.getDni());
-             ps.setString(2, habitacion.getTipoHabitacion());
+             ps.setInt(1, Reser.getHuesped());
+             ps.setString(2, Reser.getTipoHabitacion());
              ps.setInt(3, Reser.getCantPersonas());
              ps.setDate(4, Date.valueOf(Reser.getFechaEntrada()));
              ps.setDate(5, Date.valueOf(Reser.getFechaSalida()));
              ps.setDouble(6, Reser.getImporteTotal());
              ps.setBoolean(7, true);
-             
+             ps.executeUpdate();
              ResultSet rs = ps.getGeneratedKeys();
              
              if (rs.next()) {
@@ -75,7 +75,7 @@ public class ReservaData {
      }
      
      public Reserva busquedaReservasFecha (Date fechaEntrada){
-         String sql="SELECT tipoHabitacion, cantPersonas, fechaEntrada, fechaSalida, importeTotal FROM reserva WHERE fechaEntrada=? AND estado=1";
+         String sql="SELECT tipoHabitacion, cantPersonas, fechaSalida, importeTotal FROM reserva WHERE fechaEntrada=? AND estado=1";
          Reserva reser=null;
          try {
              PreparedStatement ps= con.prepareStatement(sql);
@@ -126,7 +126,7 @@ public class ReservaData {
      }
      
      public void finReserva (int huesped){
-        String sql= "UPDATE reserva set estado = 0 WHERE huesped = ?";
+        String sql= "UPDATE reserva AND habitacion set estado = 0 WHERE huesped = ?";
         try {
              PreparedStatement ps=con.prepareStatement(sql);
              ps.setInt(1, huesped);

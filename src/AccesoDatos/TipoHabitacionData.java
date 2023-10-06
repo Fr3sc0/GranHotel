@@ -18,7 +18,7 @@ public class TipoHabitacionData {
         con = Conexion.getConexion();
     } 
     
-public void agregarTipoabitacion(TipoHabitacion th){ 
+public void agregarTipoHabitacion(TipoHabitacion th){ 
         String sql = "INSERT INTO tipohabitacion(codigo, cantPersonas, cantCamas, tipoCama ,precioNoche) VALUES (?,?,?,?,?)";
         try {
             PreparedStatement ps= con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -69,9 +69,30 @@ public void borrarInscripcion (String codigo){
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Tipo habitacion.");
+        }   
+    }
+public TipoHabitacion buscarTH(String codigo){
+        String sql="SELECT cantPersonas, cantCamas, tipoCama, precioNoche FROM tipoHabitacion WHERE codigo = ? AND estado=1";
+        TipoHabitacion th=null;
+        try{
+            PreparedStatement ps= con.prepareStatement(sql);
+            ps.setString(1, codigo);
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+                th=new TipoHabitacion();
+                th.setCodigo(codigo);
+                th.setCantPersonas(rs.getInt("cantPersonas"));
+                th.setCantCamas(rs.getInt("cantCamas"));
+                th.setTipoCama(rs.getString("tipoCama"));
+                th.setPrecioNoche(rs.getDouble("precioNoche"));
+            }else{
+                JOptionPane.showMessageDialog(null, "El tipo de habitacion no ha sido encontrada.");
+            }
+            ps.close();
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla tipo habitacion.");
         }
-        
-        
+        return th;
     }
 
 }
