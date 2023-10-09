@@ -16,13 +16,12 @@ public class Reserva {
     public Reserva() {
     }
 
-    public Reserva(int huesped, String tipoHabitacion, int cantPersonas, LocalDate fechaEntrada, LocalDate fechaSalida, double importeTotal, boolean estado) {
+    public Reserva(int huesped, String tipoHabitacion, int cantPersonas, LocalDate fechaEntrada, LocalDate fechaSalida, boolean estado) {
         this.huesped = huesped;
         this.tipoHabitacion = tipoHabitacion;
         this.cantPersonas = cantPersonas;
         this.fechaEntrada = fechaEntrada;
         this.fechaSalida = fechaSalida;
-        this.importeTotal = importeTotal;
         this.estado = estado;
     }
 

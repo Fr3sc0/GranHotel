@@ -8,6 +8,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import javax.swing.JOptionPane;
 
 
@@ -22,7 +24,8 @@ public class ReservaData {
      }
      public void crearReserva (Reserva Reser){
          String sql = "INSERT INTO reserva(huesped, tipoHabitacion, cantPersonas, fechaEntrada, fechaSalida, importeTotal, estado)VALUES (?,?,?,?,?,?,?)";
-         
+         TipoHabitacionData thd=new TipoHabitacionData();
+
          try {
              PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
              ps.setInt(1, Reser.getHuesped());
@@ -30,7 +33,7 @@ public class ReservaData {
              ps.setInt(3, Reser.getCantPersonas());
              ps.setDate(4, Date.valueOf(Reser.getFechaEntrada()));
              ps.setDate(5, Date.valueOf(Reser.getFechaSalida()));
-             ps.setDouble(6, Reser.getImporteTotal());
+             ps.setDouble(6, calcularMontoEstadia(thd.buscarTH(Reser.getTipoHabitacion()), Reser.getFechaEntrada(), Reser.getFechaSalida()));
              ps.setBoolean(7, true);
              ps.executeUpdate();
              ResultSet rs = ps.getGeneratedKeys();
@@ -120,9 +123,10 @@ public class ReservaData {
      
 
      
-     public void calcularMontoEstadia (){
-         
-         
+     public double calcularMontoEstadia (TipoHabitacion th, LocalDate fe,LocalDate fs){
+         long dias= ChronoUnit.DAYS.between(fe, fs);
+         double monto=th.getPrecioNoche();
+         return monto*dias;
      }
      
      public void finReserva (int huesped){
