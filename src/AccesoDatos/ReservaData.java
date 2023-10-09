@@ -126,7 +126,7 @@ public class ReservaData {
      public double calcularMontoEstadia (TipoHabitacion th, LocalDate fe,LocalDate fs){
          long dias= ChronoUnit.DAYS.between(fe, fs);
          double monto=th.getPrecioNoche();
-         return monto*dias;
+         return (monto*dias);
      }
      
      public void finReserva (int huesped){
