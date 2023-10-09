@@ -77,16 +77,16 @@ public class ReservaData {
          return reser;
      }
      
-     public Reserva busquedaReservasFecha (Date fechaEntrada){
-         String sql="SELECT tipoHabitacion, cantPersonas, fechaSalida, importeTotal FROM reserva WHERE fechaEntrada=? AND estado=1";
+     public Reserva busquedaReservasFecha (LocalDate fechaEntrada){
+         String sql="SELECT huesped, tipoHabitacion, cantPersonas, fechaSalida, importeTotal FROM reserva WHERE fechaEntrada=? AND estado=1";
          Reserva reser=null;
          try {
              PreparedStatement ps= con.prepareStatement(sql);
-             ps.setDate(1, fechaEntrada);
+             ps.setDate(1, Date.valueOf(fechaEntrada));
              ResultSet rs=ps.executeQuery();
              if(rs.next()){
                  reser = new Reserva();
-                 reser.setFechaEntrada((fechaEntrada).toLocalDate());
+                 reser.setFechaEntrada((fechaEntrada));
                  reser.setTipoHabitacion(rs.getString("tipoHabitacion"));
                  reser.setCantPersonas(rs.getInt("cantPersonas"));
                  reser.setFechaEntrada(rs.getDate("fechaEntrada").toLocalDate());
