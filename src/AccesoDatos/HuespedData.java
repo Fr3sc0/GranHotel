@@ -30,11 +30,9 @@ public class HuespedData {
             ps.setString(3, huesped.getDomicilio());
             ps.setString(4, huesped.getCorreo());
             ps.setInt(5, huesped.getCelular());
-            ps.executeUpdate();
+            int exito= ps.executeUpdate();
             
-            ResultSet rs = ps.getGeneratedKeys();
-            
-            if (rs.next()) {
+            if (exito==1) {
                 JOptionPane.showMessageDialog(null, "Huesped agregado correctamente.");
             }
             ps.close();

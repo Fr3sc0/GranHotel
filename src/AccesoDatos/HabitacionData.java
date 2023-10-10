@@ -30,10 +30,9 @@ public void agregarHabitacion(Habitacion h){
             ps.setInt(1, h.getNroHabitacion());
             ps.setString(2, h.getTipoHabitacion());
             ps.setBoolean(3, h.isEstado());
-            ps.executeUpdate();
-            ResultSet rs = ps.getGeneratedKeys();
-            if (rs.next()) {
-                
+            int exito=ps.executeUpdate();
+            
+            if (exito==1) {
                 JOptionPane.showMessageDialog(null, "Se a agregado una habitacion");
             }
             ps.close();

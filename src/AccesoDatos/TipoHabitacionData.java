@@ -27,10 +27,9 @@ public void agregarTipoHabitacion(TipoHabitacion th){
             ps.setInt(3, th.getCantCamas());
             ps.setString(4, th.getTipoCama());
             ps.setDouble(5,th.getPrecioNoche());
-            ps.executeUpdate();
-            ResultSet rs = ps.getGeneratedKeys();
-            if (rs.next()) {
-                
+            int exito=ps.executeUpdate();
+            
+            if (exito==1) {
                 JOptionPane.showMessageDialog(null, "Se a agregado un tipo habitacion");
             }
             ps.close();
