@@ -89,7 +89,6 @@ public class ReservaData {
                  reser.setFechaEntrada((fechaEntrada));
                  reser.setTipoHabitacion(rs.getString("tipoHabitacion"));
                  reser.setCantPersonas(rs.getInt("cantPersonas"));
-                 reser.setFechaEntrada(rs.getDate("fechaEntrada").toLocalDate());
                  reser.setFechaSalida(rs.getDate("fechaSalida").toLocalDate());
                  reser.setImporteTotal(rs.getDouble("importeTotal"));
                  reser.setEstado(true);
