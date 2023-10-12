@@ -118,10 +118,7 @@ public class ReservaData {
          } catch (SQLException ex) {
              JOptionPane.showMessageDialog(null, "Error al acceder a la tabla reserva.");
          }
-     }
-     
-
-     
+     }    
      public double calcularMontoEstadia (TipoHabitacion th, LocalDate fe,LocalDate fs){
          long dias= ChronoUnit.DAYS.between(fe, fs);
          double monto=th.getPrecioNoche();

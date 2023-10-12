@@ -15,13 +15,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
-        mGestionHuesped = new javax.swing.JMenu();
-        mHuesped = new javax.swing.JMenuItem();
+        mHuesped = new javax.swing.JMenu();
+        mGestionHuesped = new javax.swing.JMenuItem();
         mHabitacionTH = new javax.swing.JMenu();
         mHabitacion = new javax.swing.JMenuItem();
         mTipoHabitacion = new javax.swing.JMenuItem();
-        mReserva = new javax.swing.JMenu();
-        mGestionReserva = new javax.swing.JMenuItem();
+        mR = new javax.swing.JMenu();
+        mReserva = new javax.swing.JMenuItem();
         mSalir = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -37,17 +37,17 @@ public class MenuPrincipal extends javax.swing.JFrame {
             .addGap(0, 421, Short.MAX_VALUE)
         );
 
-        mGestionHuesped.setText("Huésped");
+        mHuesped.setText("Huésped");
+
+        mGestionHuesped.setText("GestionHuésped");
         mGestionHuesped.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mGestionHuespedActionPerformed(evt);
             }
         });
+        mHuesped.add(mGestionHuesped);
 
-        mHuesped.setText("Gestion huésped");
-        mGestionHuesped.add(mHuesped);
-
-        jMenuBar1.add(mGestionHuesped);
+        jMenuBar1.add(mHuesped);
 
         mHabitacionTH.setText("Habitacion");
 
@@ -69,19 +69,24 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(mHabitacionTH);
 
+        mR.setText("Reserva");
+
         mReserva.setText("Reserva");
         mReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mReservaActionPerformed(evt);
             }
         });
+        mR.add(mReserva);
 
-        mGestionReserva.setText("Gestion reserva");
-        mReserva.add(mGestionReserva);
-
-        jMenuBar1.add(mReserva);
+        jMenuBar1.add(mR);
 
         mSalir.setText("Salir");
+        mSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mSalirMouseClicked(evt);
+            }
+        });
         mSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mSalirActionPerformed(evt);
@@ -105,24 +110,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void mGestionHuespedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mGestionHuespedActionPerformed
-        escritorio.removeAll();
-        escritorio.repaint();
-        GestionHuesped gh=new GestionHuesped();
-        gh.setVisible(true);
-        escritorio.add(gh);
-        escritorio.moveToFront(gh);
-    }//GEN-LAST:event_mGestionHuespedActionPerformed
-
-    private void mReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mReservaActionPerformed
-        escritorio.removeAll();
-        escritorio.repaint();
-        Reserva r=new Reserva();
-        r.setVisible(true);
-        escritorio.add(r);
-        escritorio.moveToFront(r);
-    }//GEN-LAST:event_mReservaActionPerformed
-
     private void mHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mHabitacionActionPerformed
         escritorio.removeAll();
         escritorio.repaint();
@@ -142,8 +129,30 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_mTipoHabitacionActionPerformed
 
     private void mSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mSalirActionPerformed
-        System.exit(0);
+        dispose();
     }//GEN-LAST:event_mSalirActionPerformed
+
+    private void mReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mReservaActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        Reserva r=new Reserva();
+        r.setVisible(true);
+        escritorio.add(r);
+        escritorio.moveToFront(r);
+    }//GEN-LAST:event_mReservaActionPerformed
+
+    private void mGestionHuespedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mGestionHuespedActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        GestionHuesped gh=new GestionHuesped();
+        gh.setVisible(true);
+        escritorio.add(gh);
+        escritorio.moveToFront(gh);
+    }//GEN-LAST:event_mGestionHuespedActionPerformed
+
+    private void mSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mSalirMouseClicked
+        System.exit(0);
+    }//GEN-LAST:event_mSalirMouseClicked
 
     
     public static void main(String args[]) {
@@ -181,12 +190,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenu mGestionHuesped;
-    private javax.swing.JMenuItem mGestionReserva;
+    private javax.swing.JMenuItem mGestionHuesped;
     private javax.swing.JMenuItem mHabitacion;
     private javax.swing.JMenu mHabitacionTH;
-    private javax.swing.JMenuItem mHuesped;
-    private javax.swing.JMenu mReserva;
+    private javax.swing.JMenu mHuesped;
+    private javax.swing.JMenu mR;
+    private javax.swing.JMenuItem mReserva;
     private javax.swing.JMenu mSalir;
     private javax.swing.JMenuItem mTipoHabitacion;
     // End of variables declaration//GEN-END:variables

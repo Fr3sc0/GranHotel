@@ -4,18 +4,18 @@
   <NonVisualComponents>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <SubComponents>
-        <Menu class="javax.swing.JMenu" name="mGestionHuesped">
+        <Menu class="javax.swing.JMenu" name="mHuesped">
           <Properties>
             <Property name="text" type="java.lang.String" value="Hu&#xe9;sped"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mGestionHuespedActionPerformed"/>
-          </Events>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="mHuesped">
+            <MenuItem class="javax.swing.JMenuItem" name="mGestionHuesped">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Gestion hu&#xe9;sped"/>
+                <Property name="text" type="java.lang.String" value="GestionHu&#xe9;sped"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mGestionHuespedActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -42,18 +42,18 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="mReserva">
+        <Menu class="javax.swing.JMenu" name="mR">
           <Properties>
             <Property name="text" type="java.lang.String" value="Reserva"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mReservaActionPerformed"/>
-          </Events>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="mGestionReserva">
+            <MenuItem class="javax.swing.JMenuItem" name="mReserva">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Gestion reserva"/>
+                <Property name="text" type="java.lang.String" value="Reserva"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mReservaActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
@@ -62,6 +62,7 @@
             <Property name="text" type="java.lang.String" value="Salir"/>
           </Properties>
           <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mSalirMouseClicked"/>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mSalirActionPerformed"/>
           </Events>
         </Menu>
