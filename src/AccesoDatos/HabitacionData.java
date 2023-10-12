@@ -58,7 +58,7 @@ public void modificarH(Habitacion h){
         }
     }
 
-public void borrarInscripcion (int nroHabitacion){
+public void borrarHabitacion (int nroHabitacion){
         String sql = "DELETE FROM habitacion WHERE nroHabitacion = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);

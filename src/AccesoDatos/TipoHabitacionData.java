@@ -71,7 +71,7 @@ public void borrarInscripcion (String codigo){
         }   
     }
 public TipoHabitacion buscarTH(String codigo){
-        String sql="SELECT cantPersonas, cantCamas, tipoCama, precioNoche FROM tipoHabitacion WHERE codigo = ? AND estado=1";
+        String sql="SELECT cantPersonas, cantCamas, tipoCama, precioNoche FROM tipoHabitacion WHERE codigo = ?";
         TipoHabitacion th=null;
         try{
             PreparedStatement ps= con.prepareStatement(sql);

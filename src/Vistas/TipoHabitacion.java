@@ -1,7 +1,11 @@
 package Vistas;
 
-public class TipoHabitacion extends javax.swing.JInternalFrame {
+import AccesoDatos.TipoHabitacionData;
 
+
+public class TipoHabitacion extends javax.swing.JInternalFrame {
+    private TipoHabitacionData thd= new TipoHabitacionData();
+    private TipoHabitacion tipoHActual=null;
 
     public TipoHabitacion() {
         initComponents();
@@ -47,14 +51,39 @@ public class TipoHabitacion extends javax.swing.JInternalFrame {
         jLabel6.setText("Precio noche:");
 
         bNuevo.setText("Nuevo");
+        bNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bNuevoActionPerformed(evt);
+            }
+        });
 
         bGuardar.setText("Guardar");
+        bGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bGuardarActionPerformed(evt);
+            }
+        });
 
         bBuscar.setText("Buscar");
+        bBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bBuscarActionPerformed(evt);
+            }
+        });
 
         bEliminar.setText("Eliminar");
+        bEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bEliminarActionPerformed(evt);
+            }
+        });
 
         bSalir.setText("Salir");
+        bSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -88,7 +117,7 @@ public class TipoHabitacion extends javax.swing.JInternalFrame {
                                 .addComponent(bGuardar)
                                 .addGap(37, 37, 37)
                                 .addComponent(bEliminar)
-                                .addGap(30, 30, 30)
+                                .addGap(44, 44, 44)
                                 .addComponent(bSalir))
                             .addComponent(jLabel1))))
                 .addContainerGap(19, Short.MAX_VALUE))
@@ -131,6 +160,32 @@ public class TipoHabitacion extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void bBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBuscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bBuscarActionPerformed
+
+    private void bNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bNuevoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bNuevoActionPerformed
+
+    private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bGuardarActionPerformed
+
+    private void bEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEliminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bEliminarActionPerformed
+
+    private void bSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_bSalirActionPerformed
+    private void limpiarCampos(){
+        tfCodigo.setText("");
+        tfCantPers.setText("");
+        tfCantCamas.setText("");
+        tfTipoCama.setText("");
+        tfPrecioNoche.setText("");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bBuscar;
