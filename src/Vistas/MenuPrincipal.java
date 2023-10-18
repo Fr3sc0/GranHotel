@@ -17,9 +17,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         mHuesped = new javax.swing.JMenu();
         mGestionHuesped = new javax.swing.JMenuItem();
-        mHabitacionTH = new javax.swing.JMenu();
-        mHabitacion = new javax.swing.JMenuItem();
-        mTipoHabitacion = new javax.swing.JMenuItem();
+        mHabitacion = new javax.swing.JMenu();
+        mGestionHabitacion = new javax.swing.JMenuItem();
+        mGestionTipoHabitacion = new javax.swing.JMenuItem();
         mR = new javax.swing.JMenu();
         mReserva = new javax.swing.JMenuItem();
         mSalir = new javax.swing.JMenu();
@@ -49,25 +49,25 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(mHuesped);
 
-        mHabitacionTH.setText("Habitacion");
+        mHabitacion.setText("Habitacion");
 
-        mHabitacion.setText("GestionHabitacion");
-        mHabitacion.addActionListener(new java.awt.event.ActionListener() {
+        mGestionHabitacion.setText("GestionHabitacion");
+        mGestionHabitacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mHabitacionActionPerformed(evt);
+                mGestionHabitacionActionPerformed(evt);
             }
         });
-        mHabitacionTH.add(mHabitacion);
+        mHabitacion.add(mGestionHabitacion);
 
-        mTipoHabitacion.setText("TipoHabitacion");
-        mTipoHabitacion.addActionListener(new java.awt.event.ActionListener() {
+        mGestionTipoHabitacion.setText("GestionTipoHabitacion");
+        mGestionTipoHabitacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mTipoHabitacionActionPerformed(evt);
+                mGestionTipoHabitacionActionPerformed(evt);
             }
         });
-        mHabitacionTH.add(mTipoHabitacion);
+        mHabitacion.add(mGestionTipoHabitacion);
 
-        jMenuBar1.add(mHabitacionTH);
+        jMenuBar1.add(mHabitacion);
 
         mR.setText("Reserva");
 
@@ -110,24 +110,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void mHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mHabitacionActionPerformed
-        escritorio.removeAll();
-        escritorio.repaint();
-        GestionHabitacion h=new GestionHabitacion();
-        h.setVisible(true);
-        escritorio.add(h);
-        escritorio.moveToFront(h);
-    }//GEN-LAST:event_mHabitacionActionPerformed
-
-    private void mTipoHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mTipoHabitacionActionPerformed
-        escritorio.removeAll();
-        escritorio.repaint();
-        TipoHabitacion th=new TipoHabitacion();
-        th.setVisible(true);
-        escritorio.add(th);
-        escritorio.moveToFront(th);
-    }//GEN-LAST:event_mTipoHabitacionActionPerformed
-
     private void mSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mSalirActionPerformed
         dispose();
     }//GEN-LAST:event_mSalirActionPerformed
@@ -153,6 +135,24 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void mSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mSalirMouseClicked
         System.exit(0);
     }//GEN-LAST:event_mSalirMouseClicked
+
+    private void mGestionTipoHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mGestionTipoHabitacionActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        GestionTipoHabitacion gth= new GestionTipoHabitacion();
+        gth.setVisible(true);
+        escritorio.add(gth);
+        escritorio.moveToFront(gth);
+    }//GEN-LAST:event_mGestionTipoHabitacionActionPerformed
+
+    private void mGestionHabitacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mGestionHabitacionActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        GestionHabitacion gha= new GestionHabitacion();
+        gha.setVisible(true);
+        escritorio.add(gha);
+        escritorio.moveToFront(gha);
+    }//GEN-LAST:event_mGestionHabitacionActionPerformed
 
     
     public static void main(String args[]) {
@@ -190,13 +190,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem mGestionHabitacion;
     private javax.swing.JMenuItem mGestionHuesped;
-    private javax.swing.JMenuItem mHabitacion;
-    private javax.swing.JMenu mHabitacionTH;
+    private javax.swing.JMenuItem mGestionTipoHabitacion;
+    private javax.swing.JMenu mHabitacion;
     private javax.swing.JMenu mHuesped;
     private javax.swing.JMenu mR;
     private javax.swing.JMenuItem mReserva;
     private javax.swing.JMenu mSalir;
-    private javax.swing.JMenuItem mTipoHabitacion;
     // End of variables declaration//GEN-END:variables
 }
