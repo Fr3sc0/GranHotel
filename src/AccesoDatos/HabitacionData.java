@@ -59,7 +59,7 @@ public void modificarH(Habitacion h){
     }
 
 public void borrarHabitacion (int nroHabitacion){
-        String sql = "DELETE FROM habitacion WHERE nroHabitacion = ?";
+        String sql = "UPDATE habitacion SET estado = 0 WHERE nroHabitacion = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1,nroHabitacion);            
@@ -70,11 +70,29 @@ public void borrarHabitacion (int nroHabitacion){
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla habitacion.");
-        }
-        
-        
+        }    
     }
-
+public Habitacion buscarHabitacion(int nroHabitacion){
+        String sql="SELECT tipoHabitacion,estado FROM habitacion WHERE nroHabitacion = ?";
+        Habitacion habi=null;
+        try{
+            PreparedStatement ps= con.prepareStatement(sql);
+            ps.setInt(1, nroHabitacion);
+            ResultSet rs=ps.executeQuery();
+            if(rs.next()){
+                habi=new Habitacion();
+                habi.setNroHabitacion(nroHabitacion);
+                habi.setTipoHabitacion(rs.getString("tipoHabitacion"));
+                habi.setEstado(true);
+            }else{
+                JOptionPane.showMessageDialog(null, "Huesped no encontrado.");
+            }
+            ps.close();
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla huesped.");
+        }
+        return habi;
+    }
 public List<Habitacion> listarHabitacion(){
         String sql="SELECT nroHabitacion,tipoHabitacion,estado FROM habitacion";
         ArrayList<Habitacion> habitacion=new ArrayList<>();

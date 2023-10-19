@@ -28,6 +28,7 @@ public class GestionHabitacion extends javax.swing.JInternalFrame {
         bSalir = new javax.swing.JButton();
         Estado = new javax.swing.JLabel();
         rbEstado = new javax.swing.JRadioButton();
+        bBuscar = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Sitka Small", 0, 18)); // NOI18N
         jLabel1.setText("Gestion habitacion.");
@@ -72,6 +73,13 @@ public class GestionHabitacion extends javax.swing.JInternalFrame {
         rbEstado.setFont(new java.awt.Font("Sitka Text", 0, 12)); // NOI18N
         rbEstado.setText("Ocupada/Desocupada");
 
+        bBuscar.setText("Buscar");
+        bBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bBuscarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -79,37 +87,43 @@ public class GestionHabitacion extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(44, 44, 44))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(Estado)
-                        .addGap(67, 67, 67)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(tfTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfNroHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(rbEstado)
-                        .addGap(55, 55, 55)))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(173, 173, 173)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(bNuevo)
-                        .addGap(47, 47, 47)
-                        .addComponent(bGuardar)
-                        .addGap(44, 44, 44)
-                        .addComponent(bEliminar)
-                        .addGap(36, 36, 36)
-                        .addComponent(bSalir)))
-                .addContainerGap(71, Short.MAX_VALUE))
+                        .addGap(27, 27, 27)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(jLabel3)
+                                    .addGap(70, 70, 70)
+                                    .addComponent(tfTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(0, 0, Short.MAX_VALUE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(22, 22, 22)
+                                            .addComponent(Estado)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(rbEstado))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(53, 53, 53)
+                                            .addComponent(bNuevo)
+                                            .addGap(47, 47, 47)
+                                            .addComponent(bGuardar)))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(44, 44, 44)
+                                            .addComponent(bEliminar)
+                                            .addGap(36, 36, 36)
+                                            .addComponent(bSalir))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addGap(102, 102, 102)
+                                            .addComponent(bBuscar)))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(44, 44, 44)
+                                .addComponent(tfNroHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,15 +134,16 @@ public class GestionHabitacion extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(tfNroHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(62, 62, 62)
+                .addGap(44, 44, 44)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(tfTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Estado)
-                    .addComponent(rbEstado))
-                .addGap(62, 62, 62)
+                    .addComponent(rbEstado)
+                    .addComponent(bBuscar))
+                .addGap(61, 61, 61)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bNuevo)
                     .addComponent(bGuardar)
@@ -148,17 +163,16 @@ public class GestionHabitacion extends javax.swing.JInternalFrame {
         try{
         Integer nro= Integer.parseInt(tfNroHabitacion.getText());
         String th= tfTipoHabitacion.getText();
+        boolean estado= rbEstado.isSelected();
             if (th.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "No puede haber campos vacios.");
                 return;
             }
-            Boolean estado=rbEstado.isSelected();
             if (habitacionActual==null) {
-                habitacionActual= new Habitacion(nro,th,estado);
+                habitacionActual= new Habitacion(nro,th,true);
                 hd.modificarH(habitacionActual);
             }else{
-                habitacionActual.setNroHabitacion(nro);
-                habitacionActual.setTipoHabitacion(th);
+                habitacionActual= new Habitacion(nro,th,true);
                 hd.agregarHabitacion(habitacionActual);
             }
         }catch(NumberFormatException ex){
@@ -180,13 +194,29 @@ public class GestionHabitacion extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "No hay una habitacion seleccionada");
         }                           
     }//GEN-LAST:event_bEliminarActionPerformed
+
+    private void bBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBuscarActionPerformed
+        try{
+         Integer nro= Integer.parseInt(tfNroHabitacion.getText()); 
+         habitacionActual= hd.buscarHabitacion(nro);
+            if (habitacionActual!=null) {
+               tfTipoHabitacion.setText(habitacionActual.getTipoHabitacion());
+               rbEstado.setSelected(habitacionActual.isEstado());
+            }
+        }catch(NumberFormatException ex){
+            JOptionPane.showMessageDialog(this, "Debe ingresar un numero valido");
+            limpiarCampos();
+        }
+    }//GEN-LAST:event_bBuscarActionPerformed
     private void limpiarCampos(){
         tfNroHabitacion.setText("");
         tfTipoHabitacion.setText("");
+        rbEstado.setSelected(false);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Estado;
+    private javax.swing.JButton bBuscar;
     private javax.swing.JButton bEliminar;
     private javax.swing.JButton bGuardar;
     private javax.swing.JButton bNuevo;

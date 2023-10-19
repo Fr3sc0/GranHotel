@@ -217,7 +217,7 @@ public class GestionTipoHabitacion extends javax.swing.JInternalFrame {
                 thd.modificarTh(tipoHActual);
             }
         }catch(NumberFormatException nfe){
-            JOptionPane.showMessageDialog(this, "Debe ingresar un numero valido");
+            JOptionPane.showMessageDialog(this, "Debe ingresar un caracter valido");
         }
     }//GEN-LAST:event_bGuardarActionPerformed
 
