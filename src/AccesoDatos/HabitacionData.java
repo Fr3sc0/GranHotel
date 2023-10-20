@@ -42,13 +42,14 @@ public void agregarHabitacion(Habitacion h){
     }
 
 public void modificarH(Habitacion h){
-        String sql= "UPDATE habitacion SET tipoHabitacion  = ? WHERE nroHabitacion =? AND estado = 0 ";
+        String sql= "UPDATE habitacion SET tipoHabitacion=?, estado=? WHERE nroHabitacion=? ";
         
         try {
             PreparedStatement ps= con.prepareStatement(sql);
             
             ps.setString(1,h.getTipoHabitacion());
-            
+            ps.setBoolean(2, h.isEstado());
+            ps.setInt(3, h.getNroHabitacion());
             int filas = ps.executeUpdate();
             if (filas>0) {
                JOptionPane.showMessageDialog(null, "Se ha modificado la habitacion correctamente.");
@@ -59,7 +60,7 @@ public void modificarH(Habitacion h){
     }
 
 public void borrarHabitacion (int nroHabitacion){
-        String sql = "UPDATE habitacion SET estado = 0 WHERE nroHabitacion = ?";
+        String sql = "UPDATE habitacion SET estado=0 WHERE nroHabitacion=?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1,nroHabitacion);            
@@ -73,7 +74,7 @@ public void borrarHabitacion (int nroHabitacion){
         }    
     }
 public Habitacion buscarHabitacion(int nroHabitacion){
-        String sql="SELECT tipoHabitacion,estado FROM habitacion WHERE nroHabitacion = ?";
+        String sql="SELECT tipoHabitacion,estado FROM habitacion WHERE nroHabitacion=?";
         Habitacion habi=null;
         try{
             PreparedStatement ps= con.prepareStatement(sql);
@@ -85,11 +86,11 @@ public Habitacion buscarHabitacion(int nroHabitacion){
                 habi.setTipoHabitacion(rs.getString("tipoHabitacion"));
                 habi.setEstado(true);
             }else{
-                JOptionPane.showMessageDialog(null, "Huesped no encontrado.");
+                JOptionPane.showMessageDialog(null, "Habitacion no encontrada.");
             }
             ps.close();
         }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla huesped.");
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla habitacion.");
         }
         return habi;
     }

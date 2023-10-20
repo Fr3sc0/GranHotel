@@ -161,19 +161,21 @@ public class GestionHabitacion extends javax.swing.JInternalFrame {
 
     private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarActionPerformed
         try{
-        Integer nro= Integer.parseInt(tfNroHabitacion.getText());
+        Integer nro= Integer.valueOf(tfNroHabitacion.getText());
         String th= tfTipoHabitacion.getText();
-        boolean estado= rbEstado.isSelected();
+        boolean est= rbEstado.isSelected();
             if (th.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "No puede haber campos vacios.");
                 return;
             }
             if (habitacionActual==null) {
-                habitacionActual= new Habitacion(nro,th,true);
-                hd.modificarH(habitacionActual);
-            }else{
-                habitacionActual= new Habitacion(nro,th,true);
+                habitacionActual= new Habitacion(nro,th,est);
                 hd.agregarHabitacion(habitacionActual);
+            }else{
+                habitacionActual.setNroHabitacion(nro);
+                habitacionActual.setTipoHabitacion(th);
+                habitacionActual.setEstado(est);
+                hd.modificarH(habitacionActual);
             }
         }catch(NumberFormatException ex){
             JOptionPane.showMessageDialog(this, "Debe ingresar un numero valido");
@@ -197,7 +199,7 @@ public class GestionHabitacion extends javax.swing.JInternalFrame {
 
     private void bBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBuscarActionPerformed
         try{
-         Integer nro= Integer.parseInt(tfNroHabitacion.getText()); 
+         Integer nro= Integer.valueOf(tfNroHabitacion.getText()); 
          habitacionActual= hd.buscarHabitacion(nro);
             if (habitacionActual!=null) {
                tfTipoHabitacion.setText(habitacionActual.getTipoHabitacion());
