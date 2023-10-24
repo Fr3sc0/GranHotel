@@ -2,15 +2,23 @@ package Vistas;
 
 import AccesoDatos.HabitacionData;
 import Entidades.Habitacion;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 
 public class GestionHabitacion extends javax.swing.JInternalFrame {
+     private List<Habitacion> listaH;
     private HabitacionData hd= new HabitacionData();
     private Habitacion habitacionActual=null;
+    private DefaultTableModel modelo;
 
     public GestionHabitacion() {
         initComponents();
+        modelo=new DefaultTableModel();
+        
+        armarCabeceraTabla();
     }
 
     @SuppressWarnings("unchecked")
@@ -21,16 +29,16 @@ public class GestionHabitacion extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         tfNroHabitacion = new javax.swing.JTextField();
-        tfTipoHabitacion = new javax.swing.JTextField();
         bNuevo = new javax.swing.JButton();
         bGuardar = new javax.swing.JButton();
         bEliminar = new javax.swing.JButton();
         bSalir = new javax.swing.JButton();
-        Estado = new javax.swing.JLabel();
-        rbEstado = new javax.swing.JRadioButton();
         bBuscar = new javax.swing.JButton();
+        cbTH = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tHabitacion = new javax.swing.JTable();
 
-        jLabel1.setFont(new java.awt.Font("Sitka Small", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Sitka Small", 0, 24)); // NOI18N
         jLabel1.setText("Gestion habitacion.");
 
         jLabel2.setFont(new java.awt.Font("Sitka Small", 0, 14)); // NOI18N
@@ -39,7 +47,7 @@ public class GestionHabitacion extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Sitka Small", 0, 14)); // NOI18N
         jLabel3.setText("Tipo de Habitacion:");
 
-        bNuevo.setText("Nuevo");
+        bNuevo.setText("Limpiar");
         bNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bNuevoActionPerformed(evt);
@@ -67,18 +75,27 @@ public class GestionHabitacion extends javax.swing.JInternalFrame {
             }
         });
 
-        Estado.setFont(new java.awt.Font("Sitka Small", 0, 14)); // NOI18N
-        Estado.setText("Estado:");
-
-        rbEstado.setFont(new java.awt.Font("Sitka Text", 0, 12)); // NOI18N
-        rbEstado.setText("Ocupada/Desocupada");
-
         bBuscar.setText("Buscar");
         bBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bBuscarActionPerformed(evt);
             }
         });
+
+        cbTH.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elija un tipo de habitacion", "ES", "D", "T", "SL" }));
+
+        tHabitacion.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tHabitacion);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -87,69 +104,58 @@ public class GestionHabitacion extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(173, 173, 173)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addGap(70, 70, 70)
-                                    .addComponent(tfTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(0, 0, Short.MAX_VALUE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGap(22, 22, 22)
-                                            .addComponent(Estado)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(rbEstado))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGap(53, 53, 53)
-                                            .addComponent(bNuevo)
-                                            .addGap(47, 47, 47)
-                                            .addComponent(bGuardar)))
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGap(44, 44, 44)
-                                            .addComponent(bEliminar)
-                                            .addGap(36, 36, 36)
-                                            .addComponent(bSalir))
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addGap(102, 102, 102)
-                                            .addComponent(bBuscar)))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(44, 44, 44)
-                                .addComponent(tfNroHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(24, Short.MAX_VALUE))
+                        .addGap(99, 99, 99)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(tfNroHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(bBuscar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbTH, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(154, 154, 154))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 82, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 975, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(55, 55, 55)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(bEliminar)
+                            .addComponent(bNuevo))
+                        .addComponent(bSalir, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(bGuardar))
+                .addContainerGap(79, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(492, 492, 492)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(43, 43, 43)
+                .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(tfNroHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(44, 44, 44)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tfNroHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(tfTipoHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Estado)
-                    .addComponent(rbEstado)
-                    .addComponent(bBuscar))
-                .addGap(61, 61, 61)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bNuevo)
-                    .addComponent(bGuardar)
-                    .addComponent(bEliminar)
-                    .addComponent(bSalir))
-                .addGap(37, 37, 37))
+                    .addComponent(bBuscar)
+                    .addComponent(cbTH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bGuardar))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addComponent(bNuevo)
+                        .addGap(55, 55, 55)
+                        .addComponent(bEliminar)
+                        .addGap(53, 53, 53)
+                        .addComponent(bSalir))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(88, Short.MAX_VALUE))
         );
 
         pack();
@@ -159,22 +165,43 @@ public class GestionHabitacion extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_bSalirActionPerformed
 
+    private void armarCabeceraTabla() {
+        ArrayList<Object> filacabecera = new ArrayList<>();
+        filacabecera.add("Nro. de Habitacion");
+        filacabecera.add("Tipo de Habitacion");
+        filacabecera.add("Estado");
+        for (Object it : filacabecera) {
+            modelo.addColumn(it);
+        }
+
+        tHabitacion.setModel(modelo);
+    }
+    private void borrarFilaTabla(){
+        int indice = modelo.getRowCount() -1;
+        
+        for(int i = indice;i>=0;i--){
+             modelo.removeRow(i);
+        }
+    }
+    private void cargarHabitacion() {
+        borrarFilaTabla();
+        Integer nro= Integer.valueOf(tfNroHabitacion.getText());
+        List<Habitacion> lista = (ArrayList) hd.listarHabitacion();
+        for (Habitacion h : lista) {
+            modelo.addRow(new Object[]{h.getNroHabitacion(), h.getTipoHabitacion(), h.isEstado()});
+        }
+    }
     private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarActionPerformed
         try{
         Integer nro= Integer.valueOf(tfNroHabitacion.getText());
-        String th= tfTipoHabitacion.getText();
-        boolean est= rbEstado.isSelected();
-            if (th.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "No puede haber campos vacios.");
-                return;
-            }
+        String th= cbTH.getSelectedItem().toString();
+            
             if (habitacionActual==null) {
-                habitacionActual= new Habitacion(nro,th,est);
+                habitacionActual= new Habitacion(nro,th);
                 hd.agregarHabitacion(habitacionActual);
             }else{
                 habitacionActual.setNroHabitacion(nro);
                 habitacionActual.setTipoHabitacion(th);
-                habitacionActual.setEstado(est);
                 hd.modificarH(habitacionActual);
             }
         }catch(NumberFormatException ex){
@@ -202,8 +229,7 @@ public class GestionHabitacion extends javax.swing.JInternalFrame {
          Integer nro= Integer.valueOf(tfNroHabitacion.getText()); 
          habitacionActual= hd.buscarHabitacion(nro);
             if (habitacionActual!=null) {
-               tfTipoHabitacion.setText(habitacionActual.getTipoHabitacion());
-               rbEstado.setSelected(habitacionActual.isEstado());
+               cbTH.setSelectedItem(habitacionActual.getTipoHabitacion());
             }
         }catch(NumberFormatException ex){
             JOptionPane.showMessageDialog(this, "Debe ingresar un numero valido");
@@ -212,22 +238,21 @@ public class GestionHabitacion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_bBuscarActionPerformed
     private void limpiarCampos(){
         tfNroHabitacion.setText("");
-        tfTipoHabitacion.setText("");
-        rbEstado.setSelected(false);
+        cbTH.setSelectedIndex(0);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Estado;
     private javax.swing.JButton bBuscar;
     private javax.swing.JButton bEliminar;
     private javax.swing.JButton bGuardar;
     private javax.swing.JButton bNuevo;
     private javax.swing.JButton bSalir;
+    private javax.swing.JComboBox<String> cbTH;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JRadioButton rbEstado;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tHabitacion;
     private javax.swing.JTextField tfNroHabitacion;
-    private javax.swing.JTextField tfTipoHabitacion;
     // End of variables declaration//GEN-END:variables
 }

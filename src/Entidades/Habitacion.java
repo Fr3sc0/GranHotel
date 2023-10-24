@@ -10,6 +10,11 @@ public class Habitacion {
     public Habitacion() {
     }
 
+    public Habitacion(int nroHabitacion, String tipoHabitacion) {
+        this.nroHabitacion = nroHabitacion;
+        this.tipoHabitacion = tipoHabitacion;
+    }
+
     public Habitacion(int nroHabitacion, String tipoHabitacion, boolean estado) {
         this.nroHabitacion = nroHabitacion;
         this.tipoHabitacion = tipoHabitacion;
