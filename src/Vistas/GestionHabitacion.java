@@ -9,13 +9,14 @@ import javax.swing.table.DefaultTableModel;
 
 
 public class GestionHabitacion extends javax.swing.JInternalFrame {
-     private List<Habitacion> listaH;
+    private List<Habitacion> listaH;
     private HabitacionData hd= new HabitacionData();
     private Habitacion habitacionActual=null;
     private DefaultTableModel modelo;
 
     public GestionHabitacion() {
         initComponents();
+        listaH= hd.listarHabitacion();
         modelo=new DefaultTableModel();
         
         armarCabeceraTabla();
@@ -173,7 +174,6 @@ public class GestionHabitacion extends javax.swing.JInternalFrame {
         for (Object it : filacabecera) {
             modelo.addColumn(it);
         }
-
         tHabitacion.setModel(modelo);
     }
     private void borrarFilaTabla(){
@@ -183,14 +183,7 @@ public class GestionHabitacion extends javax.swing.JInternalFrame {
              modelo.removeRow(i);
         }
     }
-    private void cargarHabitacion() {
-        borrarFilaTabla();
-        Integer nro= Integer.valueOf(tfNroHabitacion.getText());
-        List<Habitacion> lista = (ArrayList) hd.listarHabitacion();
-        for (Habitacion h : lista) {
-            modelo.addRow(new Object[]{h.getNroHabitacion(), h.getTipoHabitacion(), h.isEstado()});
-        }
-    }
+    
     private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarActionPerformed
         try{
         Integer nro= Integer.valueOf(tfNroHabitacion.getText());

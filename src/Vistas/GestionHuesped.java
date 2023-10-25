@@ -2,16 +2,24 @@ package Vistas;
 
 import AccesoDatos.HuespedData;
 import Entidades.Huesped;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 
 public class GestionHuesped extends javax.swing.JInternalFrame {
 
     private HuespedData hd= new HuespedData();
     private Huesped huespedActual= null;
+    private List<Huesped> listaH;
+    private DefaultTableModel modelo;
     
     public GestionHuesped() {
         initComponents();
+        listaH= hd.listarHuesped();
+        modelo=new DefaultTableModel();
+        armarCabeceraTabla();
     }
 
     @SuppressWarnings("unchecked")
@@ -256,6 +264,18 @@ public class GestionHuesped extends javax.swing.JInternalFrame {
         tfDomicilio.setText("");
         tfCorreo.setText("");
         tfCelular.setText("");
+    }
+    private void armarCabeceraTabla() {
+        ArrayList<Object> filacabecera = new ArrayList<>();
+        filacabecera.add("Dni");
+        filacabecera.add("Nombre");
+        filacabecera.add("Correo");
+        filacabecera.add("Domicilio");
+        filacabecera.add("Celular");
+        for (Object it : filacabecera) {
+            modelo.addColumn(it);
+        }
+        tHuesped.setModel(modelo);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

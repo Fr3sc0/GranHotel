@@ -26,9 +26,7 @@ public class Reserva extends javax.swing.JInternalFrame {
         
         armarCabeceraTabla();
     }
-    
-
-    
+      
     private void armarCabeceraTabla() {
         ArrayList<Object> filacabecera = new ArrayList<>();
         filacabecera.add("Dni.");
@@ -50,7 +48,15 @@ public class Reserva extends javax.swing.JInternalFrame {
         for (int i = indice; i >= 0; i--) {
             modelo.removeRow(i);
         }
+    }    
+    private void limpiarCampos(){
+        tDocumento.setText("");
+        dFechaE.setDate(null);
+        dFechaS.setDate(null);
+        cbCantP.setSelectedIndex(0);
+        cbTH.setSelectedIndex(0);
     }
+        
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -103,6 +109,11 @@ public class Reserva extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(tReserva);
 
         bNuevo.setText("Limpiar");
+        bNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bNuevoActionPerformed(evt);
+            }
+        });
 
         bFin.setText("Fin Reserva");
 
@@ -204,6 +215,10 @@ public class Reserva extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bNuevoActionPerformed
+        limpiarCampos();
+    }//GEN-LAST:event_bNuevoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

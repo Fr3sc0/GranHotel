@@ -2,8 +2,6 @@
 package AccesoDatos;
 
 import Entidades.Habitacion;
-import Entidades.Huesped;
-import Entidades.TipoHabitacion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

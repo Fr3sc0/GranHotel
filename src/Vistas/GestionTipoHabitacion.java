@@ -251,11 +251,11 @@ public class GestionTipoHabitacion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_bSalirActionPerformed
 
     private void limpiarCampos(){
-        /*tfCodigo.setText("");
-        tfPersonas.setText("");
+        tfCodigo.setText("");
+        cbCantP.setSelectedIndex(0);
         tfTipoCama.setText("");
-        tfCantCamas.setText("");
-        tfPrecioN.setText("");*/
+        cbCantC.setSelectedIndex(0);
+        tfPrecioN.setText("");
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bBuscar;
