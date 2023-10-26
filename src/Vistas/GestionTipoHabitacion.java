@@ -100,7 +100,7 @@ public class GestionTipoHabitacion extends javax.swing.JInternalFrame {
 
         cbCantP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escoja una cant. de personas", "1", "2", "3", "4", "5", "6", "7", "8" }));
 
-        cbCantC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escoja una cant. de camas", "Simple", "Queen", "King Size" }));
+        cbCantC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escoja una cant. de camas", "1", "2", "3", "4", "5", "6", " ", " ", " " }));
 
         tTH.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -125,8 +125,8 @@ public class GestionTipoHabitacion extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(30, 30, 30)
-                        .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(47, 47, 47)
+                        .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(bBuscar)
                         .addGap(62, 62, 62)
                         .addComponent(jLabel3)
@@ -216,28 +216,28 @@ public class GestionTipoHabitacion extends javax.swing.JInternalFrame {
         }
     }
     private void bBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBuscarActionPerformed
-        /*try{
+        try{
         String code= tfCodigo.getText();
         tipoHActual=thd.buscarTH(code);
         if (tipoHActual!=null) {
-            tfPersonas.setText(Integer.toString(tipoHActual.getCantPersonas()));
+            cbCantP.setSelectedItem(Integer.toString(tipoHActual.getCantPersonas()));
             tfTipoCama.setText(tipoHActual.getTipoCama());
-            tfCantCamas.setText(Integer.toString(tipoHActual.getCantCamas()));
+            cbCantC.setSelectedItem(Integer.toString(tipoHActual.getCantCamas()));
             tfPrecioN.setText(String.valueOf(tipoHActual.getPrecioNoche()));    
             }else{
                 JOptionPane.showMessageDialog(this, "El tipo de Habitacion no se encuentra registrada.");
             }    
         }catch(NumberFormatException ex){
             JOptionPane.showMessageDialog(this, "Debe ingresar un caracter valido");
-        }*/
+        }
     }//GEN-LAST:event_bBuscarActionPerformed
 
     private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarActionPerformed
-       /* try{
+      try{
         String code= tfCodigo.getText();
-        Integer personas=Integer.parseInt(tfPersonas.getText());
+        Integer personas=Integer.parseInt(cbCantP.getSelectedItem().toString());
         String tipoCama=tfTipoCama.getText();
-        Integer cantCamas= Integer.parseInt(tfCantCamas.getText());
+        Integer cantCamas= Integer.parseInt(cbCantC.getSelectedItem().toString());
         if (code.isEmpty()||tipoCama.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "No puede haber campos vacios.");
                 return;
@@ -253,10 +253,11 @@ public class GestionTipoHabitacion extends javax.swing.JInternalFrame {
                 tipoHActual.setTipoCama(tipoCama);
                 tipoHActual.setPrecioNoche(precioN);
                 thd.modificarTh(tipoHActual);
+             
             }
         }catch(NumberFormatException nfe){
             JOptionPane.showMessageDialog(this, "Debe ingresar un caracter valido");
-        }*/
+        }
     }//GEN-LAST:event_bGuardarActionPerformed
 
     private void bNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bNuevoActionPerformed

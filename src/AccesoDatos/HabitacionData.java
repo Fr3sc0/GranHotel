@@ -82,7 +82,7 @@ public Habitacion buscarHabitacion(int nroHabitacion){
                 habi=new Habitacion();
                 habi.setNroHabitacion(nroHabitacion);
                 habi.setTipoHabitacion(rs.getString("tipoHabitacion"));
-                habi.setEstado(true);
+                habi.setEstado(rs.getBoolean("estado"));
             }else{
                 JOptionPane.showMessageDialog(null, "Habitacion no encontrada.");
             }

@@ -41,7 +41,7 @@ public void agregarTipoHabitacion(TipoHabitacion th){
     }
 
 public void modificarTh(TipoHabitacion th){
-        String sql= "UPDATE tipohabitacion SET cantPersonas = ?,cantCamas = ?,tipoCama = ?,precioNoche =?  WHERE código =?";
+        String sql= "UPDATE tipohabitacion SET  cantPersonas = ?,cantCamas = ?,tipoCama = ?,precioNoche =?  WHERE codigo =?";
         
         try {
             PreparedStatement ps= con.prepareStatement(sql);
@@ -49,6 +49,7 @@ public void modificarTh(TipoHabitacion th){
             ps.setInt(2, th.getCantCamas());
             ps.setString(3, th.getTipoCama());
             ps.setDouble(4,th.getPrecioNoche());
+            ps.setString(5, th.getCodigo());
             int filas = ps.executeUpdate();
             if (filas>0) {
                JOptionPane.showMessageDialog(null, "Se ha modificado el tipo de habitacion correctamente.");

@@ -38,6 +38,8 @@ public class GestionHabitacion extends javax.swing.JInternalFrame {
         cbTH = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         tHabitacion = new javax.swing.JTable();
+        jEstado = new javax.swing.JLabel();
+        jrEstado = new javax.swing.JRadioButton();
 
         jLabel1.setFont(new java.awt.Font("Sitka Small", 0, 24)); // NOI18N
         jLabel1.setText("Gestion habitacion.");
@@ -98,36 +100,50 @@ public class GestionHabitacion extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(tHabitacion);
 
+        jEstado.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
+        jEstado.setText("Estado");
+
+        jrEstado.setText("Ocupado/Desocupado");
+        jrEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrEstadoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(99, 99, 99)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(99, 99, 99)
-                        .addComponent(jLabel2)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
-                        .addComponent(tfNroHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(bBuscar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbTH, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(154, 154, 154))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 82, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 975, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(55, 55, 55)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(tfNroHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(bBuscar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 155, Short.MAX_VALUE)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cbTH, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(306, 306, 306))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jrEstado)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 856, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(bEliminar)
-                            .addComponent(bNuevo))
-                        .addComponent(bSalir, javax.swing.GroupLayout.Alignment.TRAILING))
-                    .addComponent(bGuardar))
-                .addContainerGap(79, Short.MAX_VALUE))
+                            .addComponent(bNuevo)
+                            .addComponent(bSalir)
+                            .addComponent(bGuardar))
+                        .addContainerGap())))
             .addGroup(layout.createSequentialGroup()
                 .addGap(492, 492, 492)
                 .addComponent(jLabel1)
@@ -143,20 +159,23 @@ public class GestionHabitacion extends javax.swing.JInternalFrame {
                     .addComponent(tfNroHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(bBuscar)
-                    .addComponent(cbTH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bGuardar))
+                    .addComponent(cbTH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jrEstado))
+                .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(54, 54, 54)
                         .addComponent(bNuevo)
-                        .addGap(55, 55, 55)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bEliminar)
-                        .addGap(53, 53, 53)
-                        .addComponent(bSalir))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(88, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bSalir)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bGuardar))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(178, Short.MAX_VALUE))
         );
 
         pack();
@@ -188,13 +207,14 @@ public class GestionHabitacion extends javax.swing.JInternalFrame {
         try{
         Integer nro= Integer.valueOf(tfNroHabitacion.getText());
         String th= cbTH.getSelectedItem().toString();
-            
+               
             if (habitacionActual==null) {
-                habitacionActual= new Habitacion(nro,th);
+                habitacionActual= new Habitacion(nro,th,true);
                 hd.agregarHabitacion(habitacionActual);
             }else{
                 habitacionActual.setNroHabitacion(nro);
                 habitacionActual.setTipoHabitacion(th);
+                habitacionActual.setEstado(jrEstado.isSelected());
                 hd.modificarH(habitacionActual);
             }
         }catch(NumberFormatException ex){
@@ -220,15 +240,28 @@ public class GestionHabitacion extends javax.swing.JInternalFrame {
     private void bBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBuscarActionPerformed
         try{
          Integer nro= Integer.valueOf(tfNroHabitacion.getText()); 
-         habitacionActual= hd.buscarHabitacion(nro);
-            if (habitacionActual!=null) {
-               cbTH.setSelectedItem(habitacionActual.getTipoHabitacion());
+        Habitacion habitacionActuall= hd.buscarHabitacion(nro);
+            if (habitacionActuall!=null) {
+               cbTH.setSelectedItem(habitacionActuall.getTipoHabitacion());
+               
+                System.out.println(habitacionActuall.isEstado());
+                if(habitacionActuall.isEstado()==true){
+                    jrEstado.setSelected(true);
+                
+                } else {
+                    jrEstado.setSelected(false);
+                }
+ 
             }
         }catch(NumberFormatException ex){
             JOptionPane.showMessageDialog(this, "Debe ingresar un numero valido");
             limpiarCampos();
         }
     }//GEN-LAST:event_bBuscarActionPerformed
+
+    private void jrEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrEstadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jrEstadoActionPerformed
     private void limpiarCampos(){
         tfNroHabitacion.setText("");
         cbTH.setSelectedIndex(0);
@@ -241,10 +274,12 @@ public class GestionHabitacion extends javax.swing.JInternalFrame {
     private javax.swing.JButton bNuevo;
     private javax.swing.JButton bSalir;
     private javax.swing.JComboBox<String> cbTH;
+    private javax.swing.JLabel jEstado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JRadioButton jrEstado;
     private javax.swing.JTable tHabitacion;
     private javax.swing.JTextField tfNroHabitacion;
     // End of variables declaration//GEN-END:variables
