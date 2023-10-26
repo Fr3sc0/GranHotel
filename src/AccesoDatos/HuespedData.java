@@ -102,9 +102,30 @@ public class HuespedData {
     }
     
     public List<Huesped> listarHuesped(){
-        String sql="SELECT dni,nombre,domicilio,correo,celular FROM huesped";
+        String sql="SELECT * FROM huesped";
         ArrayList<Huesped> huespedes=new ArrayList<>();
         
+        try{
+            PreparedStatement ps=con.prepareStatement(sql);
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                Huesped hue=new Huesped();
+                hue.setDni(rs.getInt("dni"));
+                hue.setNombre(rs.getString("nombre"));
+                hue.setDomicilio(rs.getString("domicilio"));
+                hue.setCorreo(rs.getString("correo"));
+                hue.setCelular(rs.getInt("celular"));
+                huespedes.add(hue);
+            }
+          ps.close();                   
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla huesped.");
+        }
+        return huespedes;
+    }
+    public List<Huesped> listarHuespedDni(int dni){
+        ArrayList<Huesped> huespedes=new ArrayList<>();
+        String sql="SELECT * FROM huesped";
         try{
             PreparedStatement ps=con.prepareStatement(sql);
             ResultSet rs=ps.executeQuery();

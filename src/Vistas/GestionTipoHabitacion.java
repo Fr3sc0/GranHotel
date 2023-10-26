@@ -2,15 +2,23 @@ package Vistas;
 
 import Entidades.TipoHabitacion;
 import AccesoDatos.TipoHabitacionData;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 
 public class GestionTipoHabitacion extends javax.swing.JInternalFrame {
     private TipoHabitacionData thd= new TipoHabitacionData();
     private TipoHabitacion tipoHActual=null;
+    private List<TipoHabitacion> listaTH;
+    private DefaultTableModel modelo;
 
     public GestionTipoHabitacion() {
         initComponents();
+        modelo=new DefaultTableModel();
+        
+        armarCabeceraTabla();
     }
 
 
@@ -188,6 +196,25 @@ public class GestionTipoHabitacion extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void armarCabeceraTabla() {
+        ArrayList<Object> filacabecera = new ArrayList<>();
+        filacabecera.add("Codigo");
+        filacabecera.add("Cant. Personas");
+        filacabecera.add("Cant. Camas");
+        filacabecera.add("Tipo cama");
+        filacabecera.add("Precio Noche"); 
+        for (Object it : filacabecera) {
+            modelo.addColumn(it);
+        }
+        tTH.setModel(modelo);
+    }
+    private void borrarFilaTabla(){
+        int indice = modelo.getRowCount() -1;
+        
+        for(int i = indice;i>=0;i--){
+             modelo.removeRow(i);
+        }
+    }
     private void bBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBuscarActionPerformed
         /*try{
         String code= tfCodigo.getText();

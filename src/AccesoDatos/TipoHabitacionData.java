@@ -7,6 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class TipoHabitacionData {
@@ -93,8 +95,27 @@ public TipoHabitacion buscarTH(String codigo){
         }
         return th;
     }
+public List<TipoHabitacion> listarTipoHabitacion(){
+        String sql="SELECT * FROM tipoHabitacion";
+        ArrayList<TipoHabitacion> tipoHabitacion=new ArrayList<>();
+        
+        try{
+            PreparedStatement ps=con.prepareStatement(sql);
+            ResultSet rs=ps.executeQuery();
+            while(rs.next()){
+                TipoHabitacion th=new TipoHabitacion();
+                th.setCodigo(rs.getString("codigo"));
+                th.setCantPersonas(rs.getInt("cantPersonas"));
+                th.setCantCamas(rs.getInt("cantCamas"));
+                th.setTipoCama(rs.getString("tipoCama"));
+                th.setPrecioNoche(rs.getDouble("precioNoche"));
+                tipoHabitacion.add(th);
+            }
+          ps.close();                   
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla habitacion.");
+        }
+        return tipoHabitacion;
+    }
 
 }
-
-
-
