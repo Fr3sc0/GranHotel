@@ -3,12 +3,10 @@ package Vistas;
 
 public class MenuPrincipal extends javax.swing.JFrame {
 
-    
     public MenuPrincipal() {
         initComponents();
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -117,7 +115,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private void mReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mReservaActionPerformed
         escritorio.removeAll();
         escritorio.repaint();
-        Reserva r=new Reserva();
+        GestionReserva r=new GestionReserva();
         r.setVisible(true);
         escritorio.add(r);
         escritorio.moveToFront(r);
