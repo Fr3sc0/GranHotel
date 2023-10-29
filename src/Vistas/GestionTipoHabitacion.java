@@ -17,8 +17,17 @@ public class GestionTipoHabitacion extends javax.swing.JInternalFrame {
     public GestionTipoHabitacion() {
         initComponents();
         modelo=new DefaultTableModel();
+        listaTH=thd.listarTipoHabitacion();
         
         armarCabeceraTabla();
+        cargarData();
+    }
+    
+    private void cargarData(){
+        for(TipoHabitacion th:listaTH){
+            modelo.addRow(new Object[]{th.getCodigo(),th.getCantPersonas(),th.getCantCamas(),th.getTipoCama(),th.getPrecioNoche()});
+        }
+        
     }
 
 

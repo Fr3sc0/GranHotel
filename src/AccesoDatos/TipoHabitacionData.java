@@ -96,7 +96,7 @@ public TipoHabitacion buscarTH(String codigo){
         }
         return th;
     }
-public List<TipoHabitacion> listarTipoHabitacion(String codigo){
+public List<TipoHabitacion> listarTipoHabitacion(){
         String sql="SELECT * FROM tipoHabitacion";
         ArrayList<TipoHabitacion> tipoHabitacion=new ArrayList<>();
         

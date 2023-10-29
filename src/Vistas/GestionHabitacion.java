@@ -20,6 +20,13 @@ public class GestionHabitacion extends javax.swing.JInternalFrame {
         modelo=new DefaultTableModel();
         
         armarCabeceraTabla();
+        cargarData();
+    }
+    private void cargarData(){
+        for(Habitacion h:listaH){
+            int est=(h.isEstado()) ? 1 : 0;
+            modelo.addRow(new Object[]{h.getNroHabitacion(),h.getTipoHabitacion(),est});
+        }
     }
 
     @SuppressWarnings("unchecked")

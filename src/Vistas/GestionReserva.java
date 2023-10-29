@@ -13,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 public class GestionReserva extends javax.swing.JInternalFrame {
     private List<Huesped> listaHues;
     private List<Habitacion> listaHab;
+    private List<Reserva> listaRes;
     private ReservaData rd;
     private Reserva reservaActual=null;
     private HuespedData hd;
@@ -26,9 +27,11 @@ public class GestionReserva extends javax.swing.JInternalFrame {
         rd= new ReservaData();
         listaHues = hd.listarHuesped();
         listaHab = habD.listarHabitacion();
+        listaRes = rd.listarRes();
         modelo=new DefaultTableModel();
         
         armarCabeceraTabla();
+        cargarData();
     }
       
     private void armarCabeceraTabla() {
@@ -52,7 +55,15 @@ public class GestionReserva extends javax.swing.JInternalFrame {
         for (int i = indice; i >= 0; i--) {
             modelo.removeRow(i);
         }
-    }    
+    } 
+    
+    private void cargarData(){
+        for(Reserva r:listaRes){
+            Huesped h=hd.buscarHuesped(r.getHuesped());
+            modelo.addRow(new Object[]{r.getHuesped(),h.getNombre(),r.getTipoHabitacion(),r.getCantPersonas(),r.getFechaEntrada(),r.getFechaSalida()});
+        }
+    }
+    
     private void limpiarCampos(){
         tDocumento.setText("");
         dFechaE.setDate(null);
