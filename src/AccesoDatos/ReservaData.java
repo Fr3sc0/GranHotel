@@ -49,6 +49,31 @@ public class ReservaData {
         }
 
     }
+    
+    public void modificarReserva(Reserva Reser) {
+        String sql = "UPDATE reserva SET tipoHabitacion=?, cantPersonas=?, fechaEntrada=?, fechaSalida=?, importeTotal=? WHERE huesped = ?";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, Reser.getTipoHabitacion());
+            ps.setInt(2, Reser.getCantPersonas());
+            ps.setDate(3, Date.valueOf(Reser.getFechaEntrada()));
+            ps.setDate(4, Date.valueOf(Reser.getFechaSalida()));
+            ps.setDouble(5, calcularMontoEstadia(thd.buscarTH(Reser.getTipoHabitacion()), Reser.getFechaEntrada(), Reser.getFechaSalida()));
+            ps.setInt(6, Reser.getHuesped());
+            ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(null, "Reserva agregada correctamente.");
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Reserva.");
+        }
+
+    }
 
     public Reserva buscarReservaHuesped(int huesped) {
         String sql = "SELECT tipoHabitacion, cantPersonas, fechaEntrada, fechaSalida, importeTotal FROM reserva WHERE huesped=? AND estado=1";
