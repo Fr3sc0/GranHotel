@@ -4,36 +4,39 @@ import AccesoDatos.*;
 import Entidades.*;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 public class GestionReserva extends javax.swing.JInternalFrame {
+
     private List<Huesped> listaHues;
     private List<Habitacion> listaHab;
     private List<Reserva> listaRes;
     private ReservaData rd;
-    private Reserva reservaActual=null;
+    private Reserva reservaActual = null;
     private HuespedData hd;
     private HabitacionData habD;
+    private TipoHabitacionData thd;
     private DefaultTableModel modelo;
 
     public GestionReserva() {
         initComponents();
         hd = new HuespedData();
-        habD= new HabitacionData();
-        rd= new ReservaData();
+        habD = new HabitacionData();
+        rd = new ReservaData();
+        thd = new TipoHabitacionData();
         listaHues = hd.listarHuesped();
         listaHab = habD.listarHabitacion();
         listaRes = rd.listarRes();
-        modelo=new DefaultTableModel();
-        
+        modelo = new DefaultTableModel();
+
         armarCabeceraTabla();
         cargarData();
     }
-      
+
     private void armarCabeceraTabla() {
         ArrayList<Object> filacabecera = new ArrayList<>();
         filacabecera.add("Dni.");
@@ -48,30 +51,30 @@ public class GestionReserva extends javax.swing.JInternalFrame {
 
         tReserva.setModel(modelo);
     }
-    
+
     private void borrarFilaTabla() {
         int indice = modelo.getRowCount() - 1;
 
         for (int i = indice; i >= 0; i--) {
             modelo.removeRow(i);
         }
-    } 
-    
-    private void cargarData(){
-        for(Reserva r:listaRes){
-            Huesped h=hd.buscarHuesped(r.getHuesped());
-            modelo.addRow(new Object[]{r.getHuesped(),h.getNombre(),r.getTipoHabitacion(),r.getCantPersonas(),r.getFechaEntrada(),r.getFechaSalida()});
+    }
+
+    private void cargarData() {
+        for (Reserva r : listaRes) {
+            Huesped h = hd.buscarHuesped(r.getHuesped());
+            modelo.addRow(new Object[]{r.getHuesped(), h.getNombre(), r.getTipoHabitacion(), r.getCantPersonas(), r.getFechaEntrada(), r.getFechaSalida()});
         }
     }
-    
-    private void limpiarCampos(){
+
+    private void limpiarCampos() {
         tDocumento.setText("");
         dFechaE.setDate(null);
         dFechaS.setDate(null);
         cbCantP.setSelectedIndex(0);
         cbTH.setSelectedIndex(0);
     }
-        
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -142,6 +145,11 @@ public class GestionReserva extends javax.swing.JInternalFrame {
         cbCantP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ingrese una Cant.", "1 ", "2 ", "3 ", "4 ", "5 ", "6 ", "7 ", "8 ", "9 ", "10 " }));
 
         cbTH.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escoja un tipo de Habitacion", "ES", "D", "T", "SL", " " }));
+        cbTH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTHActionPerformed(evt);
+            }
+        });
 
         bBuscar.setText("Buscar");
         bBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -170,7 +178,7 @@ public class GestionReserva extends javax.swing.JInternalFrame {
         jLabel3.setFont(new java.awt.Font("Sitka Small", 0, 14)); // NOI18N
         jLabel3.setText("Importe Total:");
 
-        tIT.setEnabled(false);
+        tIT.setEditable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -180,30 +188,31 @@ public class GestionReserva extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(185, 185, 185)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(tDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(bBuscar))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 962, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(bFin)
-                                    .addComponent(bGuardar)
-                                    .addComponent(bSalir)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2)
                                     .addGap(18, 18, 18)
-                                    .addComponent(tIT, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(tDocumento, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(bBuscar))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 962, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(bFin)
+                                        .addComponent(bGuardar)
+                                        .addComponent(bSalir)))
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel4)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(cbCantP, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(12, 12, 12)))))
+                                    .addGap(12, 12, 12)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(tIT, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(768, 768, 768))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(564, 564, 564)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -281,51 +290,51 @@ public class GestionReserva extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_bNuevoActionPerformed
 
     private void bBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBuscarActionPerformed
-        try{
-        int dni= Integer.parseInt(tDocumento.getText());
-        reservaActual=rd.buscarReservaHuesped(dni);
-        if (reservaActual!=null) {
-            cbCantP.setSelectedItem(Integer.toString(reservaActual.getCantPersonas()));
-            cbTH.setSelectedItem(reservaActual.getTipoHabitacion());
-            LocalDate lc= reservaActual.getFechaEntrada();
-            java.util.Date date= java.util.Date.from(lc.atStartOfDay(ZoneId.systemDefault()).toInstant());
-            dFechaE.setDate(date);
-            LocalDate cl= reservaActual.getFechaSalida();
-            java.util.Date date1= java.util.Date.from(cl.atStartOfDay(ZoneId.systemDefault()).toInstant());
-            dFechaS.setDate(date);  
-            }else{
+        try {
+            int dni = Integer.parseInt(tDocumento.getText());
+            reservaActual = rd.buscarReservaHuesped(dni);
+            if (reservaActual != null) {
+                cbCantP.setSelectedItem(Integer.toString(reservaActual.getCantPersonas()));
+                cbTH.setSelectedItem(reservaActual.getTipoHabitacion());
+                LocalDate lc = reservaActual.getFechaEntrada();
+                java.util.Date date = java.util.Date.from(lc.atStartOfDay(ZoneId.systemDefault()).toInstant());
+                dFechaE.setDate(date);
+                LocalDate cl = reservaActual.getFechaSalida();
+                java.util.Date date1 = java.util.Date.from(cl.atStartOfDay(ZoneId.systemDefault()).toInstant());
+                dFechaS.setDate(date);
+            } else {
                 JOptionPane.showMessageDialog(this, "La reserva no se encuentra registrada.");
-            }    
-        }catch(NumberFormatException ex){
+            }
+        } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Debe ingresar un caracter valido");
         }
     }//GEN-LAST:event_bBuscarActionPerformed
 
     private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarActionPerformed
-        try{
-        int dni= Integer.parseInt(tDocumento.getText());
-        int cp= Integer.parseInt(cbCantP.getSelectedItem().toString());
-        String cth=cbTH.getSelectedItem().toString();
-        java.util.Date fechaE=dFechaE.getDate();
-        LocalDate fE=fechaE.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        java.util.Date fechaS=dFechaS.getDate();
-        LocalDate fS=fechaS.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        //double impT= Integer.parseInt(tIT.getText());
-            if (reservaActual==null) {
-                reservaActual=new Reserva(dni, cth, cp, fE, fS, true);
+        try {
+            int dni = Integer.parseInt(tDocumento.getText());
+            int cp = Integer.parseInt(cbCantP.getSelectedItem().toString());
+            String cth = cbTH.getSelectedItem().toString();
+            java.util.Date fechaE = dFechaE.getDate();
+            LocalDate fE = fechaE.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            java.util.Date fechaS = dFechaS.getDate();
+            LocalDate fS = fechaS.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            //double impT= Integer.parseInt(tIT.getText());
+            if (reservaActual == null) {
+                reservaActual = new Reserva(dni, cth, cp, fE, fS, true);
                 rd.crearReserva(reservaActual);
             }
-        }catch(NumberFormatException ex){
+        } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Debe ingresar un numero valido");
         }
     }//GEN-LAST:event_bGuardarActionPerformed
 
     private void bFinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bFinActionPerformed
-        if (reservaActual!=null) {
+        if (reservaActual != null) {
             rd.cancelarReserva(reservaActual.getHuesped());
-            reservaActual=null;
+            reservaActual = null;
             limpiarCampos();
-        }else{
+        } else {
             JOptionPane.showMessageDialog(this, "No hay una reserva seleccionada.");
         }
     }//GEN-LAST:event_bFinActionPerformed
@@ -333,6 +342,24 @@ public class GestionReserva extends javax.swing.JInternalFrame {
     private void bSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSalirActionPerformed
         dispose();
     }//GEN-LAST:event_bSalirActionPerformed
+
+    private void cbTHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTHActionPerformed
+        // TODO add your handling code here:
+        if (cbTH.getSelectedIndex() != 0) {
+            TipoHabitacion th = thd.buscarTH(cbTH.getSelectedItem().toString());
+            if (dFechaE.getDate() != null && dFechaS.getDate() != null) {
+                LocalDate fe = dFechaE.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                LocalDate fs = dFechaS.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                if (fe.isAfter(fs)) {
+                    JOptionPane.showMessageDialog(null, "Ingrese una estadia valida");
+                }else{
+                    tIT.setText(String.valueOf(rd.calcularMontoEstadia(th, fe, fs)));
+                }
+            } else {
+                    tIT.setText(String.valueOf(th.getPrecioNoche()));
+                }
+        }
+    }//GEN-LAST:event_cbTHActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
