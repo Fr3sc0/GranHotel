@@ -115,10 +115,6 @@
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JDesktopPane" name="escritorio">
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JDesktopPane(){&#xa;    public void paintComponent(Graphics g){&#xa;        g.drawImage(iMenu,0,0,getWidth(),getHeight(),this);&#xa;    }&#xa;};&#xa;&#xa;escritorio.setPreferredSize(new java.awt.Dimension(1280, 720))"/>
-        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="ImageIcon icono=new ImageIcon(getClass().getResource(&quot;/Recursos/Hotel.jpg&quot;));&#xa;Image iMenu=icono.getImage();"/>
-      </AuxValues>
 
       <Layout>
         <DimensionLayout dim="0">

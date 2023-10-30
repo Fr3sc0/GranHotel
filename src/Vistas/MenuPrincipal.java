@@ -1,12 +1,8 @@
 package Vistas;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Image;
-import javax.swing.ImageIcon;
 
 public class MenuPrincipal extends javax.swing.JFrame {
-    Color c=new Color(70,100,100);
+
     public MenuPrincipal() {
         initComponents();
     }
@@ -15,15 +11,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ImageIcon icono=new ImageIcon(getClass().getResource("/Recursos/Hotel.jpg"));
-        Image iMenu=icono.getImage();
-        escritorio = new javax.swing.JDesktopPane(){
-            public void paintComponent(Graphics g){
-                g.drawImage(iMenu,0,0,getWidth(),getHeight(),this);
-            }
-        };
-
-        escritorio.setPreferredSize(new java.awt.Dimension(1280, 720));
+        escritorio = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         mHuesped = new javax.swing.JMenu();
         mGestionHuesped = new javax.swing.JMenuItem();
@@ -133,7 +121,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         escritorio.repaint();
         GestionReserva r=new GestionReserva();
         r.setVisible(true);
-        r.getContentPane().setBackground(c);
         escritorio.add(r);
         escritorio.moveToFront(r);
     }//GEN-LAST:event_mReservaActionPerformed
@@ -143,7 +130,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         escritorio.repaint();
         GestionHuesped gh=new GestionHuesped();
         gh.setVisible(true);
-        gh.getContentPane().setBackground(c);
         escritorio.add(gh);
         escritorio.moveToFront(gh);
     }//GEN-LAST:event_mGestionHuespedActionPerformed
@@ -157,7 +143,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         escritorio.repaint();
         GestionTipoHabitacion gth= new GestionTipoHabitacion();
         gth.setVisible(true);
-        gth.getContentPane().setBackground(c);
         escritorio.add(gth);
         escritorio.moveToFront(gth);
     }//GEN-LAST:event_mGestionTipoHabitacionActionPerformed
@@ -167,7 +152,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         escritorio.repaint();
         GestionHabitacion gha= new GestionHabitacion();
         gha.setVisible(true);
-        gha.getContentPane().setBackground(c);
         escritorio.add(gha);
         escritorio.moveToFront(gha);
     }//GEN-LAST:event_mGestionHabitacionActionPerformed
