@@ -244,15 +244,20 @@ public class GestionTipoHabitacion extends javax.swing.JInternalFrame {
     private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarActionPerformed
       try{
         String code= tfCodigo.getText();
-        Integer personas=Integer.parseInt(cbCantP.getSelectedItem().toString());
         String tipoCama=tfTipoCama.getText();
-        Integer cantCamas= Integer.parseInt(cbCantC.getSelectedItem().toString());
-        if (code.isEmpty()||tipoCama.isEmpty()) {
+        if (cbCantP.getSelectedIndex() == 0) {
+                JOptionPane.showMessageDialog(this, "Debe ingresar una opcion de cantidad de personas.");
+            }else if(cbCantC.getSelectedIndex() == 0){
+                JOptionPane.showMessageDialog(this, "Debe ingresar una opcion de cantidad de camas.");
+            }else if (code.isEmpty()||tipoCama.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "No puede haber campos vacios.");
                 return;
-            }
-        double precioN= Double.parseDouble(tfPrecioN.getText());
-            if (tipoHActual==null) {
+            }else{
+                
+                Integer personas=Integer.parseInt(cbCantP.getSelectedItem().toString());               
+                Integer cantCamas= Integer.parseInt(cbCantC.getSelectedItem().toString());
+                double precioN= Double.parseDouble(tfPrecioN.getText());
+                if (tipoHActual==null) {
                 tipoHActual=new TipoHabitacion(code,personas, cantCamas,tipoCama, precioN);
                 thd.agregarTipoHabitacion(tipoHActual);
             }else{
@@ -264,6 +269,7 @@ public class GestionTipoHabitacion extends javax.swing.JInternalFrame {
                 thd.modificarTh(tipoHActual);
              
             }
+            }   
         }catch(NumberFormatException nfe){
             JOptionPane.showMessageDialog(this, "Debe ingresar un caracter valido");
         }

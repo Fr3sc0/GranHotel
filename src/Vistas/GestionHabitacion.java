@@ -214,7 +214,11 @@ public class GestionHabitacion extends javax.swing.JInternalFrame {
         try{
         Integer nro= Integer.valueOf(tfNroHabitacion.getText());
         String th= cbTH.getSelectedItem().toString();
-               
+            if (cbTH.getSelectedIndex() == 0) {
+                JOptionPane.showMessageDialog(this, "Debe ingresar una opcion de tipo habitacion.");
+            }else{
+                
+            
             if (habitacionActual==null) {
                 habitacionActual= new Habitacion(nro,th,true);
                 hd.agregarHabitacion(habitacionActual);
@@ -223,6 +227,7 @@ public class GestionHabitacion extends javax.swing.JInternalFrame {
                 habitacionActual.setTipoHabitacion(th);
                 habitacionActual.setEstado(jrEstado.isSelected());
                 hd.modificarH(habitacionActual);
+            }
             }
         }catch(NumberFormatException ex){
             JOptionPane.showMessageDialog(this, "Debe ingresar un numero valido");
