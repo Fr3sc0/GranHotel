@@ -32,9 +32,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 697, Short.MAX_VALUE)
+            .addGap(0, 681, Short.MAX_VALUE)
         );
 
+        mHuesped.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Huesped.png"))); // NOI18N
         mHuesped.setText("Huésped");
 
         mGestionHuesped.setText("GestionHuésped");
@@ -47,6 +48,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(mHuesped);
 
+        mHabitacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Habitacion y Tipo habitacion.png"))); // NOI18N
         mHabitacion.setText("Habitacion");
 
         mGestionHabitacion.setText("GestionHabitacion");
@@ -67,6 +69,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(mHabitacion);
 
+        mR.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Reserva.png"))); // NOI18N
         mR.setText("Reserva");
 
         mReserva.setText("Reserva");
@@ -79,6 +82,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(mR);
 
+        mSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Salida.png"))); // NOI18N
         mSalir.setText("Salir");
         mSalir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
