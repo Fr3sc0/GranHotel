@@ -58,7 +58,7 @@ public void modificarH(Habitacion h){
     }
 
 public void borrarHabitacion (int nroHabitacion){
-        String sql = "UPDATE habitacion SET estado=0 WHERE nroHabitacion=?";
+        String sql = "DELETE FROM habitacion WHERE nroHabitacion=?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1,nroHabitacion);            

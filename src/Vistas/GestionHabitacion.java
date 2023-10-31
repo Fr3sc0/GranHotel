@@ -215,11 +215,12 @@ public class GestionHabitacion extends javax.swing.JInternalFrame {
         try{
         Integer nro= Integer.valueOf(tfNroHabitacion.getText());
         String th= cbTH.getSelectedItem().toString();
+        habitacionActual= hd.buscarHabitacion(nro);
             if (cbTH.getSelectedIndex() == 0) {
                 JOptionPane.showMessageDialog(this, "Debe ingresar una opcion de tipo habitacion.");
             }
             if (habitacionActual==null) {
-                habitacionActual= new Habitacion(nro,th,true);
+                habitacionActual= new Habitacion(nro,th,jrEstado.isSelected());
                 hd.agregarHabitacion(habitacionActual);
                 borrarFilaTabla();
                 cargarData();
@@ -229,7 +230,7 @@ public class GestionHabitacion extends javax.swing.JInternalFrame {
                 hd.modificarH(habitacionActual);
                 borrarFilaTabla();
                 cargarData();
-            }
+           }
         }catch(NumberFormatException ex){
             JOptionPane.showMessageDialog(this, "Debe ingresar un numero valido");
         }
@@ -241,6 +242,8 @@ public class GestionHabitacion extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_bNuevoActionPerformed
 
     private void bEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEliminarActionPerformed
+        int nro= Integer.parseInt(tfNroHabitacion.getText());
+        habitacionActual= hd.buscarHabitacion(nro);
         if (habitacionActual!=null) {
             hd.borrarHabitacion(habitacionActual.getNroHabitacion());
             habitacionActual=null;
