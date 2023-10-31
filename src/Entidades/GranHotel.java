@@ -1,9 +1,6 @@
 
 package Entidades;
 
-import AccesoDatos.*;
-import java.time.LocalDate;
-
 
 public class GranHotel {
 

@@ -24,6 +24,7 @@ public class GestionTipoHabitacion extends javax.swing.JInternalFrame {
     }
     
     private void cargarData(){
+        listaTH =thd.listarTipoHabitacion();
         for(TipoHabitacion th:listaTH){
             modelo.addRow(new Object[]{th.getCodigo(),th.getCantPersonas(),th.getCantCamas(),th.getTipoCama(),th.getPrecioNoche()});
         }
@@ -232,7 +233,9 @@ public class GestionTipoHabitacion extends javax.swing.JInternalFrame {
             cbCantP.setSelectedItem(Integer.toString(tipoHActual.getCantPersonas()));
             tfTipoCama.setText(tipoHActual.getTipoCama());
             cbCantC.setSelectedItem(Integer.toString(tipoHActual.getCantCamas()));
-            tfPrecioN.setText(String.valueOf(tipoHActual.getPrecioNoche()));    
+            tfPrecioN.setText(String.valueOf(tipoHActual.getPrecioNoche()));
+            borrarFilaTabla();
+            cargarData();
             }else{
                 JOptionPane.showMessageDialog(this, "El tipo de Habitacion no se encuentra registrada.");
             }    
@@ -251,15 +254,15 @@ public class GestionTipoHabitacion extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "Debe ingresar una opcion de cantidad de camas.");
             }else if (code.isEmpty()||tipoCama.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "No puede haber campos vacios.");
-                return;
-            }else{
-                
-                Integer personas=Integer.parseInt(cbCantP.getSelectedItem().toString());               
-                Integer cantCamas= Integer.parseInt(cbCantC.getSelectedItem().toString());
+            }else{                
+                Integer personas=Integer.valueOf(cbCantP.getSelectedItem().toString());               
+                Integer cantCamas= Integer.valueOf(cbCantC.getSelectedItem().toString());
                 double precioN= Double.parseDouble(tfPrecioN.getText());
                 if (tipoHActual==null) {
                 tipoHActual=new TipoHabitacion(code,personas, cantCamas,tipoCama, precioN);
                 thd.agregarTipoHabitacion(tipoHActual);
+                borrarFilaTabla();
+                cargarData();
             }else{
                 tipoHActual.setCodigo(code);
                 tipoHActual.setCantPersonas(personas);
@@ -267,7 +270,8 @@ public class GestionTipoHabitacion extends javax.swing.JInternalFrame {
                 tipoHActual.setTipoCama(tipoCama);
                 tipoHActual.setPrecioNoche(precioN);
                 thd.modificarTh(tipoHActual);
-             
+                borrarFilaTabla();
+                cargarData();
             }
             }   
         }catch(NumberFormatException nfe){
@@ -284,6 +288,8 @@ public class GestionTipoHabitacion extends javax.swing.JInternalFrame {
         if (tipoHActual!=null) {
             thd.borrarTipoHabitacion(tipoHActual.getCodigo());
             tipoHActual=null;
+            borrarFilaTabla();
+            cargarData();
         }else{
             JOptionPane.showMessageDialog(this, "No hay un tipo de habitacion seleccionada");
         } 
@@ -299,6 +305,8 @@ public class GestionTipoHabitacion extends javax.swing.JInternalFrame {
         tfTipoCama.setText("");
         cbCantC.setSelectedIndex(0);
         tfPrecioN.setText("");
+        borrarFilaTabla();
+        cargarData();
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bBuscar;

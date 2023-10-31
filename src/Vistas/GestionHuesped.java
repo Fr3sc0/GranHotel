@@ -183,13 +183,6 @@ public class GestionHuesped extends javax.swing.JInternalFrame {
         try{
         Integer dni= Integer.parseInt(tfDni.getText());
         huespedActual=hd.buscarHuesped(dni);
-        String nombre= tfDomicilio.getText();
-        Integer Correo= Integer.valueOf(tfCorreo.getText());
-        String domicilio=tfDomicilio.getText();
-        if (nombre.isEmpty()||domicilio.isEmpty()||Correo.equals("")) {
-                JOptionPane.showMessageDialog(this, "No puede haber campos vacios.");
-                return;
-            }
             if (huespedActual!=null) {
                 tfNombre.setText(huespedActual.getNombre());
                 tfDomicilio.setText(huespedActual.getDomicilio());
@@ -197,6 +190,7 @@ public class GestionHuesped extends javax.swing.JInternalFrame {
                 tfCelular.setText(Integer.toString(huespedActual.getCelular()));
             }else{
                 JOptionPane.showMessageDialog(this, "El huesped no se encuentra registrado.");
+                limpiarCampos();
             }
         }catch(NumberFormatException ex){
             JOptionPane.showMessageDialog(this, "Debe ingresar un numero o caracter valido");

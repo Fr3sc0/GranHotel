@@ -76,6 +76,8 @@ public class GestionReserva extends javax.swing.JInternalFrame {
         cbCantP.setSelectedIndex(0);
         cbTH.setSelectedIndex(0);
         tIT.setText("");
+        borrarFilaTabla();
+        cargarData();
     }
 
     @SuppressWarnings("unchecked")
@@ -316,6 +318,8 @@ public class GestionReserva extends javax.swing.JInternalFrame {
                 LocalDate cl = reservaActual.getFechaSalida();
                 Date date1 = java.util.Date.from(cl.atStartOfDay(ZoneId.systemDefault()).toInstant());
                 dFechaS.setDate(date1);
+                borrarFilaTabla();
+                cargarData();
             }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Debe ingresar un caracter valido");

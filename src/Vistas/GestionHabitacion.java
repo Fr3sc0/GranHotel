@@ -23,6 +23,7 @@ public class GestionHabitacion extends javax.swing.JInternalFrame {
         cargarData();
     }
     private void cargarData(){
+        listaH =hd.listarHabitacion();
         for(Habitacion h:listaH){
             int est=(h.isEstado()) ? 1 : 0;
             modelo.addRow(new Object[]{h.getNroHabitacion(),h.getTipoHabitacion(),est});
@@ -216,18 +217,18 @@ public class GestionHabitacion extends javax.swing.JInternalFrame {
         String th= cbTH.getSelectedItem().toString();
             if (cbTH.getSelectedIndex() == 0) {
                 JOptionPane.showMessageDialog(this, "Debe ingresar una opcion de tipo habitacion.");
-            }else{
-                
-            
+            }
             if (habitacionActual==null) {
                 habitacionActual= new Habitacion(nro,th,true);
                 hd.agregarHabitacion(habitacionActual);
+                borrarFilaTabla();
+                cargarData();
             }else{
-                habitacionActual.setNroHabitacion(nro);
                 habitacionActual.setTipoHabitacion(th);
                 habitacionActual.setEstado(jrEstado.isSelected());
                 hd.modificarH(habitacionActual);
-            }
+                borrarFilaTabla();
+                cargarData();
             }
         }catch(NumberFormatException ex){
             JOptionPane.showMessageDialog(this, "Debe ingresar un numero valido");
@@ -254,14 +255,15 @@ public class GestionHabitacion extends javax.swing.JInternalFrame {
         Integer nro= Integer.valueOf(tfNroHabitacion.getText()); 
         Habitacion habitacionActuall= hd.buscarHabitacion(nro);
             if (habitacionActuall!=null) {
-               cbTH.setSelectedItem(habitacionActuall.getTipoHabitacion());
-               
-                System.out.println(habitacionActuall.isEstado());
+                cbTH.setSelectedItem(habitacionActuall.getTipoHabitacion());
                 if(habitacionActuall.isEstado()==true){
                     jrEstado.setSelected(true);
-                
+                    borrarFilaTabla();
+                    cargarData();
                 } else {
                     jrEstado.setSelected(false);
+                    borrarFilaTabla();
+                    cargarData();
                 }
             }
         }catch(NumberFormatException ex){
@@ -272,6 +274,8 @@ public class GestionHabitacion extends javax.swing.JInternalFrame {
     private void limpiarCampos(){
         tfNroHabitacion.setText("");
         cbTH.setSelectedIndex(0);
+        borrarFilaTabla();
+        cargarData();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
