@@ -2,12 +2,16 @@ package Vistas;
 
 import AccesoDatos.*;
 import Entidades.*;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,6 +26,7 @@ public class GestionReserva extends javax.swing.JInternalFrame {
     private HabitacionData habD;
     private TipoHabitacionData thd;
     private DefaultTableModel modelo;
+    private DefaultComboBoxModel<Habitacion> cbm = new DefaultComboBoxModel<>();
 
     public GestionReserva() {
         initComponents();
@@ -33,15 +38,28 @@ public class GestionReserva extends javax.swing.JInternalFrame {
         listaHab = habD.listarHabitacion();
         listaRes = rd.listarRes();
         modelo = new DefaultTableModel();
-
+        tReserva.setDefaultEditor(Object.class, null);
+        cbTH.setModel(cbm);
+        cargaHabi();
         armarCabeceraTabla();
         cargarData();
+    }
+
+    private void cargaHabi() {
+        cbTH.removeAllItems();
+        listaHab = habD.listarHabitacion();
+        for (Habitacion h : listaHab) {
+            if (!h.isEstado()) {
+                cbTH.addItem(h);
+            }
+        }
     }
 
     private void armarCabeceraTabla() {
         ArrayList<Object> filacabecera = new ArrayList<>();
         filacabecera.add("Dni.");
         filacabecera.add("Nombre");
+        filacabecera.add("Habitacion");
         filacabecera.add("TipoHabitacion");
         filacabecera.add("Cant. Personas");
         filacabecera.add("Fecha Entrada");
@@ -65,7 +83,7 @@ public class GestionReserva extends javax.swing.JInternalFrame {
         listaRes = rd.listarRes();
         for (Reserva r : listaRes) {
             Huesped h = hd.buscarHuesped(r.getHuesped());
-            modelo.addRow(new Object[]{r.getHuesped(), h.getNombre(), r.getTipoHabitacion(), r.getCantPersonas(), r.getFechaEntrada(), r.getFechaSalida()});
+            modelo.addRow(new Object[]{r.getHuesped(), h.getNombre(), r.getHabi().getNroHabitacion(), r.getHabi().getTipoHabitacion(), r.getCantPersonas(), r.getFechaEntrada(), r.getFechaSalida()});
         }
     }
 
@@ -118,7 +136,7 @@ public class GestionReserva extends javax.swing.JInternalFrame {
         jLabel6.setText("Fecha de Salida");
 
         jLabel7.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
-        jLabel7.setText("Tipo Habitación:");
+        jLabel7.setText("Habitación:");
 
         tReserva.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -163,7 +181,6 @@ public class GestionReserva extends javax.swing.JInternalFrame {
 
         cbCantP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ingrese una Cant.", "1", "2", "3", "4", "5", "6", "7", "8" }));
 
-        cbTH.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escoja un tipo de Habitacion", "ES", "D", "T", "SL", " " }));
         cbTH.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbTHActionPerformed(evt);
@@ -306,44 +323,74 @@ public class GestionReserva extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_bNuevoActionPerformed
 
     private void bBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBuscarActionPerformed
-        try {
-            int dni = Integer.parseInt(tDocumento.getText());
-            reservaActual = rd.buscarReservaHuesped(dni);
-            if (reservaActual != null) {
-                cbCantP.setSelectedItem(Integer.toString(reservaActual.getCantPersonas()));
-                cbTH.setSelectedItem(reservaActual.getTipoHabitacion());
-                LocalDate lc = reservaActual.getFechaEntrada();
-                Date date = java.util.Date.from(lc.atStartOfDay(ZoneId.systemDefault()).toInstant());
-                dFechaE.setDate(date);
-                LocalDate cl = reservaActual.getFechaSalida();
-                Date date1 = java.util.Date.from(cl.atStartOfDay(ZoneId.systemDefault()).toInstant());
-                dFechaS.setDate(date1);
-                borrarFilaTabla();
-                cargarData();
+        if (tDocumento.getText().isEmpty() && dFechaE.getDate() != null) {
+            Instant ins = dFechaE.getDate().toInstant();
+            LocalDate lc = ins.atZone(ZoneId.systemDefault()).toLocalDate();
+            borrarFilaTabla();
+            listaRes = rd.listarRes();
+            for (Reserva r : listaRes) {
+                Huesped h = hd.buscarHuesped(r.getHuesped());
+                if (lc.equals(r.getFechaEntrada())) {
+                    modelo.addRow(new Object[]{r.getHuesped(), h.getNombre(), r.getHabi().getNroHabitacion(), r.getHabi().getTipoHabitacion(), r.getCantPersonas(), r.getFechaEntrada(), r.getFechaSalida()});
+                }
             }
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Debe ingresar un caracter valido");
+            if (modelo.getRowCount() == 0) {
+                cargarData();
+                JOptionPane.showMessageDialog(null, "No se encuentran reservas en la fecha seleccionada.");
+            }
+        } else {
+            try {
+                int dni = Integer.parseInt(tDocumento.getText());
+                reservaActual = rd.buscarReservaHuesped(dni);
+                if (reservaActual != null) {
+                    /*cbCantP.setSelectedItem(Integer.toString(reservaActual.getCantPersonas()));
+                    cbTH.setSelectedItem(reservaActual.getHabi().getTipoHabitacion());
+                    LocalDate lc = reservaActual.getFechaEntrada();
+                    Date date = java.util.Date.from(lc.atStartOfDay(ZoneId.systemDefault()).toInstant());
+                    dFechaE.setDate(date);
+                    LocalDate cl = reservaActual.getFechaSalida();
+                    Date date1 = java.util.Date.from(cl.atStartOfDay(ZoneId.systemDefault()).toInstant());
+                    dFechaS.setDate(date1);
+                    cargarData();*/
+                    borrarFilaTabla();
+                    listaRes = rd.listarRes();
+                    for (Reserva r : listaRes) {
+                        Huesped h = hd.buscarHuesped(r.getHuesped());
+                        if (dni == r.getHuesped()) {
+                            modelo.addRow(new Object[]{r.getHuesped(), h.getNombre(), r.getHabi().getNroHabitacion(), r.getHabi().getTipoHabitacion(), r.getCantPersonas(), r.getFechaEntrada(), r.getFechaSalida()});
+                        }
+                    }
+                }
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(this, "Debe ingresar un caracter valido");
+            }
         }
     }//GEN-LAST:event_bBuscarActionPerformed
 
     private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarActionPerformed
         try {
             int dni = Integer.parseInt(tDocumento.getText());
-            String cth = cbTH.getSelectedItem().toString();
+            Habitacion cth = (Habitacion) cbTH.getSelectedItem();
             int cp = Integer.parseInt(cbCantP.getSelectedItem().toString());
             Date fechaE = dFechaE.getDate();
             LocalDate fE = fechaE.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             Date fechaS = dFechaS.getDate();
             LocalDate fS = fechaS.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             double impT = Double.parseDouble(tIT.getText());
-            if (reservaActual == null) {
+            if (fE.isAfter(fS)) {
+                JOptionPane.showMessageDialog(null, "Error al seleccionar la estadia");
+            } else if (reservaActual == null) {
                 reservaActual = new Reserva(dni, cth, cp, fE, fS, impT, true);
                 rd.crearReserva(reservaActual);
+                if (!cth.isEstado()) {
+                    habD.actEst(cth);
+                }
                 borrarFilaTabla();
                 cargarData();
-            }else{
+                cargaHabi();
+            } else {
                 reservaActual.setHuesped(dni);
-                reservaActual.setTipoHabitacion(cth);
+                reservaActual.setHabi(cth);
                 reservaActual.setCantPersonas(cp);
                 reservaActual.setFechaEntrada(fE);
                 reservaActual.setFechaSalida(fS);
@@ -351,6 +398,7 @@ public class GestionReserva extends javax.swing.JInternalFrame {
                 rd.modificarReserva(reservaActual);
                 borrarFilaTabla();
                 cargarData();
+                cargaHabi();
             }
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Debe ingresar un numero valido");
@@ -359,6 +407,7 @@ public class GestionReserva extends javax.swing.JInternalFrame {
 
     private void bFinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bFinActionPerformed
         if (reservaActual != null) {
+            habD.actEst(reservaActual.getHabi());
             rd.cancelarReserva(reservaActual.getHuesped());
             reservaActual = null;
             limpiarCampos();
@@ -375,14 +424,14 @@ public class GestionReserva extends javax.swing.JInternalFrame {
 
     private void cbTHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTHActionPerformed
         // TODO add your handling code here:
-        if (cbTH.getSelectedIndex() != 0) {
-            TipoHabitacion th = thd.buscarTH(cbTH.getSelectedItem().toString());
+        if (cbTH.equals(null)) {
+            Habitacion cth = (Habitacion) cbTH.getSelectedItem();
+            Habitacion h = habD.buscarHabitacion(cth.getNroHabitacion());
+            TipoHabitacion th = thd.buscarTH(h.getTipoHabitacion());
             if (dFechaE.getDate() != null && dFechaS.getDate() != null) {
                 LocalDate fe = dFechaE.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                 LocalDate fs = dFechaS.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                if (fe.isAfter(fs)) {
-                    JOptionPane.showMessageDialog(null, "Ingrese una estadia valida");
-                } else {
+                if (fe.isBefore(fs)) {
                     tIT.setText(String.valueOf(rd.calcularMontoEstadia(th, fe, fs)));
                 }
             } else {
@@ -393,15 +442,35 @@ public class GestionReserva extends javax.swing.JInternalFrame {
 
     private void dFechaEPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dFechaEPropertyChange
         // TODO add your handling code here:
-        if (cbTH.getSelectedIndex() != 0) {
-            TipoHabitacion th = thd.buscarTH(cbTH.getSelectedItem().toString());
-            if (dFechaE.getDate() != null && dFechaS.getDate() != null) {
-                LocalDate fe = dFechaE.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                LocalDate fs = dFechaS.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                if (fe.isAfter(fs) || fe.isEqual(fs)) {
-                    JOptionPane.showMessageDialog(null, "Ingrese una estadia valida");
-                } else {
-                    tIT.setText(String.valueOf(rd.calcularMontoEstadia(th, fe, fs)));
+        Habitacion cth = (Habitacion) cbTH.getSelectedItem();
+        Habitacion hab = habD.buscarHabitacion(cth.getNroHabitacion());
+        TipoHabitacion th = thd.buscarTH(hab.getTipoHabitacion());
+        if (dFechaE.getDate() != null && dFechaS.getDate() != null) {
+            LocalDate fe = dFechaE.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDate fs = dFechaS.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            if (fe.isBefore(fs)) {
+                tIT.setText(String.valueOf(rd.calcularMontoEstadia(th, fe, fs)));
+            }
+            LocalDate re;
+            LocalDate rs;
+            cbTH.removeAllItems();
+            listaHab = habD.listarHabitacion();
+            listaRes = rd.listarRes();
+            List<Integer> aux = new ArrayList();
+            for (Reserva r : listaRes) {
+                re = r.getFechaEntrada();
+                rs = r.getFechaSalida();
+                if (!aux.contains(r.getHabi().getNroHabitacion())) {
+                    if (rs.isBefore(fe) || re.isAfter(fs)) {
+                        cbTH.addItem(r.getHabi());
+                        listaHab.remove(r.getHabi());
+                        aux.add(r.getHabi().getNroHabitacion());
+                    }
+                }
+            }
+            for (Habitacion h : listaHab) {
+                if (!h.isEstado()) {
+                    cbTH.addItem(h);
                 }
             }
         }
@@ -409,15 +478,35 @@ public class GestionReserva extends javax.swing.JInternalFrame {
 
     private void dFechaSPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_dFechaSPropertyChange
         // TODO add your handling code here:
-        if (cbTH.getSelectedIndex() != 0) {
-            TipoHabitacion th = thd.buscarTH(cbTH.getSelectedItem().toString());
-            if (dFechaE.getDate() != null && dFechaS.getDate() != null) {
-                LocalDate fe = dFechaE.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                LocalDate fs = dFechaS.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                if (fe.isAfter(fs) || fe.isEqual(fs)) {
-                    JOptionPane.showMessageDialog(null, "Ingrese una estadia valida");
-                } else {
-                    tIT.setText(String.valueOf(rd.calcularMontoEstadia(th, fe, fs)));
+        Habitacion cth = (Habitacion) cbTH.getSelectedItem();
+        Habitacion hab = habD.buscarHabitacion(cth.getNroHabitacion());
+        TipoHabitacion th = thd.buscarTH(hab.getTipoHabitacion());
+        if (dFechaE.getDate() != null && dFechaS.getDate() != null) {
+            LocalDate fe = dFechaE.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDate fs = dFechaS.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            if (fe.isBefore(fs)) {
+                tIT.setText(String.valueOf(rd.calcularMontoEstadia(th, fe, fs)));
+            }
+            LocalDate re;
+            LocalDate rs;
+            cbTH.removeAllItems();
+            listaHab = habD.listarHabitacion();
+            listaRes = rd.listarRes();
+            List<Integer> aux = new ArrayList();
+            for (Reserva r : listaRes) {
+                re = r.getFechaEntrada();
+                rs = r.getFechaSalida();
+                if (!aux.contains(r.getHabi().getNroHabitacion())){
+                    if (rs.isBefore(fe) || re.isAfter(fs)) {
+                        cbTH.addItem(r.getHabi());
+                        listaHab.remove(r.getHabi());
+                        aux.add(r.getHabi().getNroHabitacion());
+                    }
+                }
+            }
+            for (Habitacion h : listaHab) {
+                if (!h.isEstado()) {
+                    cbTH.addItem(h);
                 }
             }
         }
@@ -431,7 +520,7 @@ public class GestionReserva extends javax.swing.JInternalFrame {
     private javax.swing.JButton bNuevo;
     private javax.swing.JButton bSalir;
     private javax.swing.JComboBox<String> cbCantP;
-    private javax.swing.JComboBox<String> cbTH;
+    private javax.swing.JComboBox<Habitacion> cbTH;
     private com.toedter.calendar.JDateChooser dFechaE;
     private com.toedter.calendar.JDateChooser dFechaS;
     private javax.swing.JLabel jLabel1;

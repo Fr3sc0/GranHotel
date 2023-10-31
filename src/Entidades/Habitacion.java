@@ -47,7 +47,7 @@ public class Habitacion {
 
     @Override
     public String toString() {
-        return " Tipo de Habitacion:" + tipoHabitacion ;
+        return nroHabitacion + "-" + tipoHabitacion ;
     }
     
     

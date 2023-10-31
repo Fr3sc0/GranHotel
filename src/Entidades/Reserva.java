@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 public class Reserva {
    private int huesped;
-   private String tipoHabitacion;
+   private Habitacion habi;
    private int cantPersonas;
    private LocalDate fechaEntrada;
    private LocalDate fechaSalida;
@@ -16,9 +16,9 @@ public class Reserva {
     public Reserva() {
     }
 
-    public Reserva(int huesped, String tipoHabitacion, int cantPersonas, LocalDate fechaEntrada, LocalDate fechaSalida, double importeTotal, boolean estado) {
+    public Reserva(int huesped, Habitacion habi, int cantPersonas, LocalDate fechaEntrada, LocalDate fechaSalida, double importeTotal, boolean estado) {
         this.huesped = huesped;
-        this.tipoHabitacion = tipoHabitacion;
+        this.habi = habi;
         this.cantPersonas = cantPersonas;
         this.fechaEntrada = fechaEntrada;
         this.fechaSalida = fechaSalida;
@@ -26,9 +26,9 @@ public class Reserva {
         this.estado = estado;
     }
 
-    public Reserva(int huesped, String tipoHabitacion, int cantPersonas, LocalDate fechaEntrada, LocalDate fechaSalida, boolean estado) {
+    public Reserva(int huesped, Habitacion habi, int cantPersonas, LocalDate fechaEntrada, LocalDate fechaSalida, boolean estado) {
         this.huesped = huesped;
-        this.tipoHabitacion = tipoHabitacion;
+        this.habi = habi;
         this.cantPersonas = cantPersonas;
         this.fechaEntrada = fechaEntrada;
         this.fechaSalida = fechaSalida;
@@ -43,12 +43,12 @@ public class Reserva {
         this.huesped = huesped;
     }
 
-    public String getTipoHabitacion() {
-        return tipoHabitacion;
+    public Habitacion getHabi() {
+        return habi;
     }
 
-    public void setTipoHabitacion(String tipoHabitacion) {
-        this.tipoHabitacion = tipoHabitacion;
+    public void setHabi(Habitacion habi) {
+        this.habi = habi;
     }
 
     public int getCantPersonas() {
@@ -93,7 +93,7 @@ public class Reserva {
 
     @Override
     public String toString() {
-        return "Reserva:" + " Huesped:" + huesped + " TipoHabitacion:" + tipoHabitacion + " CantPersonas=" + cantPersonas + "  FechaEntrada=" + fechaEntrada + " FechaSalida=" + fechaSalida + "  ImporteTotal=" + importeTotal + " Estado=" + estado;
+        return "Reserva:" + " Huesped:" + huesped + " Habitacion:" + habi + " CantPersonas=" + cantPersonas + "  FechaEntrada=" + fechaEntrada + " FechaSalida=" + fechaSalida + "  ImporteTotal=" + importeTotal + " Estado=" + estado;
     }
    
    

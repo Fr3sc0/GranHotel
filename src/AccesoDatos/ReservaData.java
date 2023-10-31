@@ -17,6 +17,7 @@ public class ReservaData {
 
     private Connection con = null;
     TipoHabitacionData thd = new TipoHabitacionData();
+    HabitacionData hd=new HabitacionData();
 
     public ReservaData() {
 
@@ -25,17 +26,18 @@ public class ReservaData {
     }
 
     public void crearReserva(Reserva Reser) {
-        String sql = "INSERT INTO reserva(huesped, tipoHabitacion, cantPersonas, fechaEntrada, fechaSalida, importeTotal, estado)VALUES (?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO reserva(huesped, habitacion, tipoHabitacion, cantPersonas, fechaEntrada, fechaSalida, importeTotal, estado)VALUES (?,?,?,?,?,?,?,?)";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, Reser.getHuesped());
-            ps.setString(2, Reser.getTipoHabitacion());
-            ps.setInt(3, Reser.getCantPersonas());
-            ps.setDate(4, Date.valueOf(Reser.getFechaEntrada()));
-            ps.setDate(5, Date.valueOf(Reser.getFechaSalida()));
-            ps.setDouble(6, calcularMontoEstadia(thd.buscarTH(Reser.getTipoHabitacion()), Reser.getFechaEntrada(), Reser.getFechaSalida()));
-            ps.setBoolean(7, true);
+            ps.setInt(2, Reser.getHabi().getNroHabitacion());
+            ps.setString(3, Reser.getHabi().getTipoHabitacion());
+            ps.setInt(4, Reser.getCantPersonas());
+            ps.setDate(5, Date.valueOf(Reser.getFechaEntrada()));
+            ps.setDate(6, Date.valueOf(Reser.getFechaSalida()));
+            ps.setDouble(7, calcularMontoEstadia(thd.buscarTH(Reser.getHabi().getTipoHabitacion()), Reser.getFechaEntrada(), Reser.getFechaSalida()));
+            ps.setBoolean(8, true);
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
 
@@ -51,16 +53,17 @@ public class ReservaData {
     }
     
     public void modificarReserva(Reserva Reser) {
-        String sql = "UPDATE reserva SET tipoHabitacion=?, cantPersonas=?, fechaEntrada=?, fechaSalida=?, importeTotal=? WHERE huesped = ?";
+        String sql = "UPDATE reserva SET habitacion=?, tipoHabitacion=?, cantPersonas=?, fechaEntrada=?, fechaSalida=?, importeTotal=? WHERE huesped = ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, Reser.getTipoHabitacion());
-            ps.setInt(2, Reser.getCantPersonas());
-            ps.setDate(3, Date.valueOf(Reser.getFechaEntrada()));
-            ps.setDate(4, Date.valueOf(Reser.getFechaSalida()));
-            ps.setDouble(5, calcularMontoEstadia(thd.buscarTH(Reser.getTipoHabitacion()), Reser.getFechaEntrada(), Reser.getFechaSalida()));
-            ps.setInt(6, Reser.getHuesped());
+            ps.setInt(1, Reser.getHabi().getNroHabitacion());
+            ps.setString(2, Reser.getHabi().getTipoHabitacion());
+            ps.setInt(3, Reser.getCantPersonas());
+            ps.setDate(4, Date.valueOf(Reser.getFechaEntrada()));
+            ps.setDate(5, Date.valueOf(Reser.getFechaSalida()));
+            ps.setDouble(6, calcularMontoEstadia(thd.buscarTH(Reser.getHabi().getTipoHabitacion()), Reser.getFechaEntrada(), Reser.getFechaSalida()));
+            ps.setInt(7, Reser.getHuesped());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
 
@@ -76,7 +79,7 @@ public class ReservaData {
     }
 
     public Reserva buscarReservaHuesped(int huesped) {
-        String sql = "SELECT tipoHabitacion, cantPersonas, fechaEntrada, fechaSalida, importeTotal FROM reserva WHERE huesped=? AND estado=1";
+        String sql = "SELECT habitacion, cantPersonas, fechaEntrada, fechaSalida, importeTotal FROM reserva WHERE huesped=? AND estado=1";
         Reserva reser = null;
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -85,7 +88,7 @@ public class ReservaData {
             if (rs.next()) {
                 reser = new Reserva();
                 reser.setHuesped(huesped);
-                reser.setTipoHabitacion(rs.getString("tipoHabitacion"));
+                reser.setHabi(hd.buscarHabitacion(rs.getInt("habitacion")));
                 reser.setCantPersonas(rs.getInt("cantPersonas"));
                 reser.setFechaEntrada(rs.getDate("fechaEntrada").toLocalDate());
                 reser.setFechaSalida(rs.getDate("fechaSalida").toLocalDate());
@@ -104,7 +107,7 @@ public class ReservaData {
     }
 
     public Reserva busquedaReservasFecha(LocalDate fechaEntrada) {
-        String sql = "SELECT huesped, tipoHabitacion, cantPersonas, fechaSalida, importeTotal FROM reserva WHERE fechaEntrada=? AND estado=1";
+        String sql = "SELECT huesped, habitacion, cantPersonas, fechaSalida, importeTotal FROM reserva WHERE fechaEntrada=? AND estado=1";
         Reserva reser = null;
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -113,7 +116,7 @@ public class ReservaData {
             if (rs.next()) {
                 reser = new Reserva();
                 reser.setFechaEntrada((fechaEntrada));
-                reser.setTipoHabitacion(rs.getString("tipoHabitacion"));
+                reser.setHabi(hd.buscarHabitacion(rs.getInt("habitacion")));
                 reser.setCantPersonas(rs.getInt("cantPersonas"));
                 reser.setFechaSalida(rs.getDate("fechaSalida").toLocalDate());
                 reser.setImporteTotal(rs.getDouble("importeTotal"));
@@ -177,7 +180,7 @@ public class ReservaData {
             while (rs.next()) {
                 Reserva reser = new Reserva();
                 reser.setHuesped(rs.getInt("huesped"));
-                reser.setTipoHabitacion(rs.getString("tipoHabitacion"));
+                reser.setHabi(hd.buscarHabitacion(rs.getInt("habitacion")));
                 reser.setCantPersonas(rs.getInt("cantPersonas"));
                 reser.setFechaEntrada(rs.getDate("fechaEntrada").toLocalDate());
                 reser.setFechaSalida(rs.getDate("fechaSalida").toLocalDate());

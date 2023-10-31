@@ -3,6 +3,8 @@ package Vistas;
 import AccesoDatos.HuespedData;
 import Entidades.Huesped;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 
@@ -18,7 +20,13 @@ public class GestionHuesped extends javax.swing.JInternalFrame {
         
        
     }
-
+    
+    public static boolean validarTxt(String txt) {
+        Pattern patron = Pattern.compile("^[A-Za-z ]+$");
+        Matcher coincidencia = patron.matcher(txt);
+        
+        return coincidencia.matches();
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -205,7 +213,14 @@ public class GestionHuesped extends javax.swing.JInternalFrame {
     private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarActionPerformed
         try{
         Integer dni= Integer.parseInt(tfDni.getText());
-        String nombre=tfNombre.getText();
+        String nombre="";
+        if (validarTxt(tfNombre.getText())) {
+            nombre=tfNombre.getText();
+        } else {
+            JOptionPane.showMessageDialog(null,"El texto no es válido, contiene números o caracteres especiales.");
+            return;
+        }
+        
         String domicilio=tfDomicilio.getText();
         String correo=tfCorreo.getText();
             if (nombre.isEmpty()||domicilio.isEmpty()||correo.isEmpty()) {
