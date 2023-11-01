@@ -69,7 +69,7 @@ public class TipoHabitacion {
 
     @Override
     public String toString() {
-        return "Codigo:" + codigo + " Cantidad de Personas:" + cantPersonas + " Cantidad de Camas:" + cantCamas + " TipoCama:" + tipoCama + " PrecioxNoche:" + precioNoche;
+        return codigo;
     }
     
     

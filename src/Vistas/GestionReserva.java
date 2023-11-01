@@ -122,6 +122,7 @@ public class GestionReserva extends javax.swing.JInternalFrame {
         bSalir = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         tIT = new javax.swing.JTextField();
+        bSelec = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Sitka Small", 0, 24)); // NOI18N
         jLabel1.setText("Reserva.");
@@ -222,6 +223,14 @@ public class GestionReserva extends javax.swing.JInternalFrame {
         tIT.setEditable(false);
         tIT.setPreferredSize(new java.awt.Dimension(75, 30));
 
+        bSelec.setText("Seleccionar");
+        bSelec.setPreferredSize(new java.awt.Dimension(100, 30));
+        bSelec.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bSelecActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -267,11 +276,13 @@ public class GestionReserva extends javax.swing.JInternalFrame {
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1020, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(bGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(207, 207, 207)
+                                .addGap(175, 175, 175)
                                 .addComponent(bFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(207, 207, 207)
-                                .addComponent(bNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(96, 96, 96)
+                                .addComponent(bSelec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(bNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(175, 175, 175)
                                 .addComponent(bSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(180, 180, 180))
         );
@@ -309,7 +320,8 @@ public class GestionReserva extends javax.swing.JInternalFrame {
                         .addComponent(bGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(bNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(bSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(bSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(bSelec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(30, 30, 30)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -320,6 +332,8 @@ public class GestionReserva extends javax.swing.JInternalFrame {
 
     private void bNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bNuevoActionPerformed
         limpiarCampos();
+        reservaActual = null;
+        cargaHabi();
     }//GEN-LAST:event_bNuevoActionPerformed
 
     private void bBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBuscarActionPerformed
@@ -343,15 +357,6 @@ public class GestionReserva extends javax.swing.JInternalFrame {
                 int dni = Integer.parseInt(tDocumento.getText());
                 reservaActual = rd.buscarReservaHuesped(dni);
                 if (reservaActual != null) {
-                    /*cbCantP.setSelectedItem(Integer.toString(reservaActual.getCantPersonas()));
-                    cbTH.setSelectedItem(reservaActual.getHabi().getTipoHabitacion());
-                    LocalDate lc = reservaActual.getFechaEntrada();
-                    Date date = java.util.Date.from(lc.atStartOfDay(ZoneId.systemDefault()).toInstant());
-                    dFechaE.setDate(date);
-                    LocalDate cl = reservaActual.getFechaSalida();
-                    Date date1 = java.util.Date.from(cl.atStartOfDay(ZoneId.systemDefault()).toInstant());
-                    dFechaS.setDate(date1);
-                    cargarData();*/
                     borrarFilaTabla();
                     listaRes = rd.listarRes();
                     for (Reserva r : listaRes) {
@@ -400,6 +405,7 @@ public class GestionReserva extends javax.swing.JInternalFrame {
                 cargarData();
                 cargaHabi();
             }
+            reservaActual = null;
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Debe ingresar un numero valido");
         }
@@ -407,8 +413,9 @@ public class GestionReserva extends javax.swing.JInternalFrame {
 
     private void bFinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bFinActionPerformed
         if (reservaActual != null) {
-            habD.actEst(reservaActual.getHabi());
-            rd.cancelarReserva(reservaActual.getHuesped());
+            //habD.actEst(reservaActual.getHabi());
+            //rd.cancelarReserva(reservaActual.getHuesped());
+            rd.finReserva(reservaActual.getHuesped(), reservaActual.getFechaEntrada(), reservaActual.getHabi().getNroHabitacion());
             reservaActual = null;
             limpiarCampos();
             borrarFilaTabla();
@@ -496,7 +503,7 @@ public class GestionReserva extends javax.swing.JInternalFrame {
             for (Reserva r : listaRes) {
                 re = r.getFechaEntrada();
                 rs = r.getFechaSalida();
-                if (!aux.contains(r.getHabi().getNroHabitacion())){
+                if (!aux.contains(r.getHabi().getNroHabitacion())) {
                     if (rs.isBefore(fe) || re.isAfter(fs)) {
                         cbTH.addItem(r.getHabi());
                         listaHab.remove(r.getHabi());
@@ -512,6 +519,41 @@ public class GestionReserva extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_dFechaSPropertyChange
 
+    private void bSelecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSelecActionPerformed
+        // TODO add your handling code here:
+        int i = tReserva.getSelectedRow();
+        if (i != -1) {
+            
+            tDocumento.setText(tReserva.getValueAt(i, 0).toString());
+            cbCantP.setSelectedItem(tReserva.getValueAt(i, 4).toString());
+            LocalDate lde=(LocalDate) tReserva.getValueAt(i, 5);
+            Date de= Date.from(lde.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            dFechaE.setDate(de);
+            LocalDate lds=(LocalDate) tReserva.getValueAt(i, 6);
+            Date ds= Date.from(lds.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            dFechaS.setDate(ds);
+            Habitacion h= habD.buscarHabitacion(Integer.parseInt(tReserva.getValueAt(i, 2).toString()));
+            cbTH.addItem(h);
+            cbTH.setSelectedItem(h);
+            /*
+            int cp=0;
+            double impT=Double.parseDouble(tIT.getText());
+            reservaActual.setHuesped(Integer.parseInt(tDocumento.getText()));
+                reservaActual.setHabi(h);
+                reservaActual.setCantPersonas(cp);
+                reservaActual.setFechaEntrada(lde);
+                reservaActual.setFechaSalida(lds);
+                reservaActual.setImporteTotal(impT);
+*/
+            int dni = Integer.parseInt(tReserva.getValueAt(i, 0).toString());
+            reservaActual = rd.busquedaReservasDyF(dni, lde);
+        } else {
+            JOptionPane.showMessageDialog(null, "Ninguna fila seleccionada.");
+        }
+
+
+    }//GEN-LAST:event_bSelecActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bBuscar;
@@ -519,6 +561,7 @@ public class GestionReserva extends javax.swing.JInternalFrame {
     private javax.swing.JButton bGuardar;
     private javax.swing.JButton bNuevo;
     private javax.swing.JButton bSalir;
+    private javax.swing.JButton bSelec;
     private javax.swing.JComboBox<String> cbCantP;
     private javax.swing.JComboBox<Habitacion> cbTH;
     private com.toedter.calendar.JDateChooser dFechaE;

@@ -155,13 +155,20 @@ public class ReservaData {
         return (monto * dias);
     }
 
-    public void finReserva(int huesped) {
-        String sql = "UPDATE reserva AND habitacion set estado = 0 WHERE huesped = ?";
+    public void finReserva(int huesped,LocalDate fechaEntrada,int nroHabitacion) {
+        String sql = "UPDATE reserva set estado = 0 WHERE huesped = ? AND fechaEntrada=?";
+        String sql2= "UPDATE habitacion SET estado = 0 WHERE nroHabitacion = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, huesped);
+            ps.setDate(2, Date.valueOf(fechaEntrada));
             int exito = ps.executeUpdate();
-            if (exito == 1) {
+            
+            ps = con.prepareStatement(sql2);
+            ps.setInt(1, nroHabitacion);
+            ps.executeUpdate();
+            exito += ps.executeUpdate();
+            if (exito >0) {
                 JOptionPane.showMessageDialog(null, "Se ha cancelado la reserva.");
             }
             ps.close();
@@ -192,5 +199,34 @@ public class ReservaData {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla reserva.");
         }
         return reservas;
+    }
+    public Reserva busquedaReservasDyF(int huesped,LocalDate fechaEntrada) {
+        String sql = "SELECT habitacion, cantPersonas, fechaSalida, importeTotal FROM reserva WHERE huesped=? and fechaEntrada=? AND estado=1";
+        Reserva reser = null;
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, huesped);
+            ps.setDate(2, Date.valueOf(fechaEntrada));
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                reser = new Reserva();
+                reser.setHuesped(huesped);
+                reser.setFechaEntrada((fechaEntrada));
+                reser.setHabi(hd.buscarHabitacion(rs.getInt("habitacion")));
+                reser.setCantPersonas(rs.getInt("cantPersonas"));
+                reser.setFechaEntrada(fechaEntrada);
+                reser.setFechaSalida(rs.getDate("fechaSalida").toLocalDate());
+                reser.setImporteTotal(rs.getDouble("importeTotal"));
+                reser.setEstado(true);
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Reserva no encontrada.");
+            }
+            ps.close();
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla reserva.");
+        }
+        return reser;
     }
 }

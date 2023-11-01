@@ -1,7 +1,9 @@
 package Vistas;
 
 import AccesoDatos.HabitacionData;
+import AccesoDatos.TipoHabitacionData;
 import Entidades.Habitacion;
+import Entidades.TipoHabitacion;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -10,18 +12,29 @@ import javax.swing.table.DefaultTableModel;
 
 public class GestionHabitacion extends javax.swing.JInternalFrame {
     private List<Habitacion> listaH;
+    private List<TipoHabitacion> listaTH;
     private HabitacionData hd= new HabitacionData();
     private Habitacion habitacionActual=null;
+    private TipoHabitacion th=null;
+    private TipoHabitacionData thd=new TipoHabitacionData();
     private DefaultTableModel modelo;
 
     public GestionHabitacion() {
         initComponents();
         listaH= hd.listarHabitacion();
         modelo=new DefaultTableModel();
-        
+        cargaTH();
         armarCabeceraTabla();
         cargarData();
     }
+    
+    private void cargaTH(){
+        listaTH= thd.listarTipoHabitacion();
+        for(TipoHabitacion th:listaTH){
+            cbTH.addItem(th);
+        }
+    }
+    
     private void cargarData(){
         listaH =hd.listarHabitacion();
         for(Habitacion h:listaH){
@@ -92,8 +105,6 @@ public class GestionHabitacion extends javax.swing.JInternalFrame {
                 bBuscarActionPerformed(evt);
             }
         });
-
-        cbTH.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Elija un tipo de habitacion", "ES", "D", "T", "SL" }));
 
         tHabitacion.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -287,7 +298,7 @@ public class GestionHabitacion extends javax.swing.JInternalFrame {
     private javax.swing.JButton bGuardar;
     private javax.swing.JButton bNuevo;
     private javax.swing.JButton bSalir;
-    private javax.swing.JComboBox<String> cbTH;
+    private javax.swing.JComboBox<TipoHabitacion> cbTH;
     private javax.swing.JLabel jEstado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
