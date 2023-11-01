@@ -31,7 +31,7 @@ public class GestionHabitacion extends javax.swing.JInternalFrame {
     private void cargaTH(){
         listaTH= thd.listarTipoHabitacion();
         for(TipoHabitacion th:listaTH){
-            cbTH.addItem(th);
+            cbTH.addItem(th.toString());
         }
     }
     
@@ -298,7 +298,7 @@ public class GestionHabitacion extends javax.swing.JInternalFrame {
     private javax.swing.JButton bGuardar;
     private javax.swing.JButton bNuevo;
     private javax.swing.JButton bSalir;
-    private javax.swing.JComboBox<TipoHabitacion> cbTH;
+    private javax.swing.JComboBox<String> cbTH;
     private javax.swing.JLabel jEstado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
