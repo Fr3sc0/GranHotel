@@ -12,37 +12,37 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 public class GestionHabitacion extends javax.swing.JInternalFrame {
+
     private List<Habitacion> listaH;
     private List<TipoHabitacion> listaTH;
-    private HabitacionData hd= new HabitacionData();
-    private Habitacion habitacionActual=null;
-    private TipoHabitacion th=null;
-    private TipoHabitacionData thd=new TipoHabitacionData();
+    private HabitacionData hd = new HabitacionData();
+    private Habitacion habitacionActual = null;
+    private TipoHabitacion th = null;
+    private TipoHabitacionData thd = new TipoHabitacionData();
     private DefaultTableModel modelo;
 
     public GestionHabitacion() {
         initComponents();
-        listaH= hd.listarHabitacion();
-        modelo=new DefaultTableModel();
+        listaH = hd.listarHabitacion();
+        modelo = new DefaultTableModel();
         cargaTH();
         armarCabeceraTabla();
         cargarData();
     }
-    
-    private void cargaTH(){
-        listaTH= thd.listarTipoHabitacion();
-        for(TipoHabitacion th:listaTH){
+
+    private void cargaTH() {
+        listaTH = thd.listarTipoHabitacion();
+        for (TipoHabitacion th : listaTH) {
             cbTH.addItem(th.toString());
         }
     }
-    
-    private void cargarData(){
-        listaH =hd.listarHabitacion();
-        for(Habitacion h:listaH){
-            int est=(h.isEstado()) ? 1 : 0;
-            modelo.addRow(new Object[]{h.getNroHabitacion(),h.getTipoHabitacion(),est});
+
+    private void cargarData() {
+        listaH = hd.listarHabitacion();
+        for (Habitacion h : listaH) {
+            int est = (h.isEstado()) ? 1 : 0;
+            modelo.addRow(new Object[]{h.getNroHabitacion(), h.getTipoHabitacion(), est});
         }
     }
 
@@ -254,63 +254,68 @@ public class GestionHabitacion extends javax.swing.JInternalFrame {
         }
         tHabitacion.setModel(modelo);
     }
-    private void borrarFilaTabla(){
-        int indice = modelo.getRowCount() -1;
-        
-        for(int i = indice;i>=0;i--){
-             modelo.removeRow(i);
+
+    private void borrarFilaTabla() {
+        int indice = modelo.getRowCount() - 1;
+
+        for (int i = indice; i >= 0; i--) {
+            modelo.removeRow(i);
         }
     }
-    
+
     private void bGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bGuardarActionPerformed
-        try{
-        Integer nro= Integer.valueOf(tfNroHabitacion.getText());
-        String th= cbTH.getSelectedItem().toString();
-        habitacionActual= hd.buscarHabitacion(nro);
+        try {
+            Integer nro = Integer.valueOf(tfNroHabitacion.getText());
+            String th = cbTH.getSelectedItem().toString();
+            habitacionActual = hd.buscarHabitacion(nro);
             if (cbTH.getSelectedIndex() == 0) {
                 JOptionPane.showMessageDialog(this, "Debe ingresar una opcion de tipo habitacion.");
             }
-            if (habitacionActual==null) {
-                habitacionActual= new Habitacion(nro,th,jrEstado.isSelected());
+            if (habitacionActual == null) {
+                habitacionActual = new Habitacion(nro, th, jrEstado.isSelected());
                 hd.agregarHabitacion(habitacionActual);
                 borrarFilaTabla();
                 cargarData();
-            }else{
+            } else {
                 habitacionActual.setTipoHabitacion(th);
                 habitacionActual.setEstado(jrEstado.isSelected());
                 hd.modificarH(habitacionActual);
                 borrarFilaTabla();
                 cargarData();
-           }
-        }catch(NumberFormatException ex){
+            }
+        } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Debe ingresar un numero valido");
         }
     }//GEN-LAST:event_bGuardarActionPerformed
 
     private void bNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bNuevoActionPerformed
         limpiarCampos();
-        habitacionActual= null;
+        habitacionActual = null;
     }//GEN-LAST:event_bNuevoActionPerformed
 
     private void bEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEliminarActionPerformed
-        int nro= Integer.parseInt(tfNroHabitacion.getText());
-        habitacionActual= hd.buscarHabitacion(nro);
-        if (habitacionActual!=null) {
-            hd.borrarHabitacion(habitacionActual.getNroHabitacion());
-            habitacionActual=null;
-            limpiarCampos();
-        }else{
-            JOptionPane.showMessageDialog(this, "No hay una habitacion seleccionada");
-        }                           
+        try {
+            int nro = Integer.parseInt(tfNroHabitacion.getText());
+            habitacionActual = hd.buscarHabitacion(nro);
+            if (habitacionActual != null) {
+                hd.borrarHabitacion(habitacionActual.getNroHabitacion());
+                habitacionActual = null;
+                limpiarCampos();
+            } else {
+                JOptionPane.showMessageDialog(this, "No hay una habitacion seleccionada");
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar un número valido.");
+        }
     }//GEN-LAST:event_bEliminarActionPerformed
 
     private void bBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bBuscarActionPerformed
-        try{
-        Integer nro= Integer.valueOf(tfNroHabitacion.getText()); 
-        Habitacion habitacionActuall= hd.buscarHabitacion(nro);
-            if (habitacionActuall!=null) {
+        try {
+            Integer nro = Integer.valueOf(tfNroHabitacion.getText());
+            Habitacion habitacionActuall = hd.buscarHabitacion(nro);
+            if (habitacionActuall != null) {
                 cbTH.setSelectedItem(habitacionActuall.getTipoHabitacion());
-                if(habitacionActuall.isEstado()==true){
+                if (habitacionActuall.isEstado() == true) {
                     jrEstado.setSelected(true);
                     borrarFilaTabla();
                     cargarData();
@@ -320,12 +325,12 @@ public class GestionHabitacion extends javax.swing.JInternalFrame {
                     cargarData();
                 }
             }
-        }catch(NumberFormatException ex){
+        } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Debe ingresar un numero valido");
             limpiarCampos();
         }
     }//GEN-LAST:event_bBuscarActionPerformed
-    private void limpiarCampos(){
+    private void limpiarCampos() {
         tfNroHabitacion.setText("");
         cbTH.setSelectedIndex(0);
         borrarFilaTabla();
