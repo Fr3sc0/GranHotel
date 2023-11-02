@@ -79,10 +79,10 @@ public class GestionTipoHabitacion extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(tTH);
 
-        jLabel5.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Sitka Text", 3, 14)); // NOI18N
         jLabel5.setText("Tipo de cama:");
 
-        jLabel6.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Sitka Text", 3, 14)); // NOI18N
         jLabel6.setText("Precio por noche:");
 
         bGuardar.setText("Guardar");
@@ -113,7 +113,7 @@ public class GestionTipoHabitacion extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Sitka Small", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Sitka Small", 3, 14)); // NOI18N
         jLabel2.setText("Codigo:");
 
         bBuscar.setText("Buscar");
@@ -123,17 +123,17 @@ public class GestionTipoHabitacion extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Sitka Text", 3, 14)); // NOI18N
         jLabel3.setText("Cant. Personas:");
 
         cbCantP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escoja una cant. de personas", "1", "2", "3", "4", "5", "6", "7", "8" }));
 
-        jLabel4.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Sitka Text", 3, 14)); // NOI18N
         jLabel4.setText("Cant. de Camas:");
 
         cbCantC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escoja una cant. de camas", "1", "2", "3", "4", "5", "6", " ", " ", " " }));
 
-        jLabel1.setFont(new java.awt.Font("Sitka Text", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Sitka Text", 3, 24)); // NOI18N
         jLabel1.setText("Gestion Tipo de Habitacion.");
 
         escritorioTH.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -161,20 +161,21 @@ public class GestionTipoHabitacion extends javax.swing.JInternalFrame {
             .addGroup(escritorioTHLayout.createSequentialGroup()
                 .addGroup(escritorioTHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(escritorioTHLayout.createSequentialGroup()
-                        .addGap(81, 81, 81)
-                        .addGroup(escritorioTHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(133, 133, 133)
                         .addGroup(escritorioTHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(tfTipoCama, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(escritorioTHLayout.createSequentialGroup()
-                                .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(bBuscar)))
+                                .addComponent(bBuscar))
+                            .addGroup(escritorioTHLayout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tfTipoCama, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(escritorioTHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(escritorioTHLayout.createSequentialGroup()
-                                .addGap(55, 55, 55)
+                                .addGap(37, 37, 37)
                                 .addGroup(escritorioTHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(escritorioTHLayout.createSequentialGroup()
                                         .addGap(328, 328, 328)
@@ -186,7 +187,7 @@ public class GestionTipoHabitacion extends javax.swing.JInternalFrame {
                                 .addGap(38, 38, 38)
                                 .addComponent(cbCantC, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(escritorioTHLayout.createSequentialGroup()
-                                .addGap(43, 43, 43)
+                                .addGap(25, 25, 25)
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(tfPrecioN, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -199,12 +200,12 @@ public class GestionTipoHabitacion extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(bSalir))))
                     .addGroup(escritorioTHLayout.createSequentialGroup()
-                        .addGap(472, 472, 472)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(escritorioTHLayout.createSequentialGroup()
                         .addGap(147, 147, 147)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 958, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(147, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 958, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(escritorioTHLayout.createSequentialGroup()
+                        .addGap(472, 472, 472)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(139, Short.MAX_VALUE))
         );
         escritorioTHLayout.setVerticalGroup(
             escritorioTHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -102,7 +102,7 @@ public class GestionReserva extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ImageIcon icono=new ImageIcon(getClass().getResource("/Recursos/GestionReserva.jpg"));
+        ImageIcon icono=new ImageIcon(getClass().getResource("/Recursos/GestionTipoH.jpg"));
         Image iMenu=icono.getImage();
         escritorioR = new javax.swing.JDesktopPane(){
             public void paintComponent(Graphics g){
@@ -186,12 +186,12 @@ public class GestionReserva extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Sitka Text", 3, 14)); // NOI18N
         jLabel4.setText("Cantidad de personas:");
 
         cbCantP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ingrese una Cant.", "1", "2", "3", "4", "5", "6", "7", "8" }));
 
-        jLabel7.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Sitka Text", 3, 14)); // NOI18N
         jLabel7.setText("Habitación:");
 
         cbTH.addActionListener(new java.awt.event.ActionListener() {
@@ -200,13 +200,13 @@ public class GestionReserva extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Sitka Small", 0, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Sitka Small", 3, 14)); // NOI18N
         jLabel3.setText("Importe Total:");
 
         tIT.setEditable(false);
         tIT.setPreferredSize(new java.awt.Dimension(75, 30));
 
-        jLabel2.setFont(new java.awt.Font("Sitka Small", 0, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Sitka Small", 3, 14)); // NOI18N
         jLabel2.setText("Documento:");
 
         tDocumento.setPreferredSize(new java.awt.Dimension(75, 30));
@@ -219,7 +219,7 @@ public class GestionReserva extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Sitka Small", 0, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Sitka Small", 3, 14)); // NOI18N
         jLabel5.setText("Fecha de Entrada");
 
         dFechaE.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -228,7 +228,7 @@ public class GestionReserva extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Sitka Small", 0, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Sitka Small", 3, 14)); // NOI18N
         jLabel6.setText("Fecha de Salida");
 
         dFechaS.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -237,7 +237,7 @@ public class GestionReserva extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Sitka Small", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Sitka Small", 3, 24)); // NOI18N
         jLabel1.setText("Reserva.");
 
         escritorioR.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -311,7 +311,7 @@ public class GestionReserva extends javax.swing.JInternalFrame {
                                 .addGap(55, 55, 55)
                                 .addComponent(bSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1048, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         escritorioRLayout.setVerticalGroup(
             escritorioRLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
