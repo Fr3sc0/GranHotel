@@ -1,5 +1,8 @@
 package Vistas;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import Entidades.TipoHabitacion;
 import AccesoDatos.TipoHabitacionData;
 import java.util.ArrayList;
@@ -36,49 +39,51 @@ public class GestionTipoHabitacion extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        bBuscar = new javax.swing.JButton();
-        bGuardar = new javax.swing.JButton();
-        bNuevo = new javax.swing.JButton();
-        tfCodigo = new javax.swing.JTextField();
-        tfTipoCama = new javax.swing.JTextField();
-        tfPrecioN = new javax.swing.JTextField();
-        bEliminar = new javax.swing.JButton();
-        bSalir = new javax.swing.JButton();
-        cbCantP = new javax.swing.JComboBox<>();
-        cbCantC = new javax.swing.JComboBox<>();
+        ImageIcon icono=new ImageIcon(getClass().getResource("/Recursos/GestionTipoH.jpg"));
+        Image iMenu=icono.getImage();
+        escritorioTH = new javax.swing.JDesktopPane(){
+            public void paintComponent(Graphics g){
+                g.drawImage(iMenu,0,0,getWidth(),getHeight(),this);
+            }
+        };
+        escritorioTH.setPreferredSize(new java.awt.Dimension(1280, 720));
         jScrollPane1 = new javax.swing.JScrollPane();
         tTH = new javax.swing.JTable();
+        jLabel5 = new javax.swing.JLabel();
+        tfTipoCama = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        tfPrecioN = new javax.swing.JTextField();
+        bGuardar = new javax.swing.JButton();
+        bNuevo = new javax.swing.JButton();
+        bEliminar = new javax.swing.JButton();
+        bSalir = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        tfCodigo = new javax.swing.JTextField();
+        bBuscar = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        cbCantP = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        cbCantC = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
 
-        jLabel1.setFont(new java.awt.Font("Sitka Text", 0, 24)); // NOI18N
-        jLabel1.setText("Gestion Tipo de Habitacion.");
-
-        jLabel2.setFont(new java.awt.Font("Sitka Small", 0, 14)); // NOI18N
-        jLabel2.setText("Codigo:");
-
-        jLabel3.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
-        jLabel3.setText("Cant. Personas:");
-
-        jLabel4.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
-        jLabel4.setText("Cant. de Camas:");
+        tTH.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tTH);
 
         jLabel5.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
         jLabel5.setText("Tipo de cama:");
 
         jLabel6.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
         jLabel6.setText("Precio por noche:");
-
-        bBuscar.setText("Buscar");
-        bBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bBuscarActionPerformed(evt);
-            }
-        });
 
         bGuardar.setText("Guardar");
         bGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -108,79 +113,106 @@ public class GestionTipoHabitacion extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Sitka Small", 0, 14)); // NOI18N
+        jLabel2.setText("Codigo:");
+
+        bBuscar.setText("Buscar");
+        bBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bBuscarActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
+        jLabel3.setText("Cant. Personas:");
+
         cbCantP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escoja una cant. de personas", "1", "2", "3", "4", "5", "6", "7", "8" }));
+
+        jLabel4.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
+        jLabel4.setText("Cant. de Camas:");
 
         cbCantC.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Escoja una cant. de camas", "1", "2", "3", "4", "5", "6", " ", " ", " " }));
 
-        tTH.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(tTH);
+        jLabel1.setFont(new java.awt.Font("Sitka Text", 0, 24)); // NOI18N
+        jLabel1.setText("Gestion Tipo de Habitacion.");
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(117, 117, 117)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(30, 30, 30)
-                        .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(bBuscar)
-                        .addGap(62, 62, 62)
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(cbCantP, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
-                        .addComponent(cbCantC, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(132, 132, 132))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(18, 18, 18)
-                        .addComponent(tfTipoCama, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(41, 41, 41)
-                        .addComponent(jLabel6)
-                        .addGap(18, 18, 18)
-                        .addComponent(tfPrecioN, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(bGuardar)
-                        .addGap(31, 31, 31)
-                        .addComponent(bNuevo)
-                        .addGap(37, 37, 37)
-                        .addComponent(bEliminar)
-                        .addGap(27, 27, 27)
-                        .addComponent(bSalir)
-                        .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(162, 162, 162)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 951, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(464, 464, 464)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        escritorioTH.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioTH.setLayer(jLabel5, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioTH.setLayer(tfTipoCama, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioTH.setLayer(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioTH.setLayer(tfPrecioN, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioTH.setLayer(bGuardar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioTH.setLayer(bNuevo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioTH.setLayer(bEliminar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioTH.setLayer(bSalir, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioTH.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioTH.setLayer(tfCodigo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioTH.setLayer(bBuscar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioTH.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioTH.setLayer(cbCantP, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioTH.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioTH.setLayer(cbCantC, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioTH.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout escritorioTHLayout = new javax.swing.GroupLayout(escritorioTH);
+        escritorioTH.setLayout(escritorioTHLayout);
+        escritorioTHLayout.setHorizontalGroup(
+            escritorioTHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(escritorioTHLayout.createSequentialGroup()
+                .addGroup(escritorioTHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(escritorioTHLayout.createSequentialGroup()
+                        .addGap(81, 81, 81)
+                        .addGroup(escritorioTHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(escritorioTHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfTipoCama, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(escritorioTHLayout.createSequentialGroup()
+                                .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(bBuscar)))
+                        .addGroup(escritorioTHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(escritorioTHLayout.createSequentialGroup()
+                                .addGap(55, 55, 55)
+                                .addGroup(escritorioTHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(escritorioTHLayout.createSequentialGroup()
+                                        .addGap(328, 328, 328)
+                                        .addComponent(jLabel4))
+                                    .addGroup(escritorioTHLayout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cbCantP, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(38, 38, 38)
+                                .addComponent(cbCantC, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(escritorioTHLayout.createSequentialGroup()
+                                .addGap(43, 43, 43)
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(tfPrecioN, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(bGuardar)
+                                .addGap(27, 27, 27)
+                                .addComponent(bNuevo)
+                                .addGap(18, 18, 18)
+                                .addComponent(bEliminar)
+                                .addGap(18, 18, 18)
+                                .addComponent(bSalir))))
+                    .addGroup(escritorioTHLayout.createSequentialGroup()
+                        .addGap(472, 472, 472)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(escritorioTHLayout.createSequentialGroup()
+                        .addGap(147, 147, 147)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 958, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(147, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(11, 11, 11)
+        escritorioTHLayout.setVerticalGroup(
+            escritorioTHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, escritorioTHLayout.createSequentialGroup()
+                .addGap(37, 37, 37)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(27, 27, 27)
+                .addGroup(escritorioTHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bBuscar)
@@ -188,19 +220,30 @@ public class GestionTipoHabitacion extends javax.swing.JInternalFrame {
                     .addComponent(cbCantP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
                     .addComponent(cbCantC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfPrecioN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(tfTipoCama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(38, 38, 38)
+                .addGroup(escritorioTHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
+                    .addComponent(tfTipoCama, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(tfPrecioN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bGuardar)
                     .addComponent(bNuevo)
                     .addComponent(bEliminar)
                     .addComponent(bSalir))
-                .addGap(37, 37, 37)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
+                .addGap(36, 36, 36))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(escritorioTH, javax.swing.GroupLayout.Alignment.TRAILING)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(escritorioTH, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
         pack();
@@ -316,6 +359,7 @@ public class GestionTipoHabitacion extends javax.swing.JInternalFrame {
     private javax.swing.JButton bSalir;
     private javax.swing.JComboBox<String> cbCantC;
     private javax.swing.JComboBox<String> cbCantP;
+    private javax.swing.JDesktopPane escritorioTH;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

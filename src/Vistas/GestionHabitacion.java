@@ -1,5 +1,8 @@
 package Vistas;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import AccesoDatos.HabitacionData;
 import AccesoDatos.TipoHabitacionData;
 import Entidades.Habitacion;
@@ -47,34 +50,40 @@ public class GestionHabitacion extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        ImageIcon icono=new ImageIcon(getClass().getResource("/Recursos/GestionHab.jpg"));
+        Image iMenu=icono.getImage();
+        escritorioH = new javax.swing.JDesktopPane(){
+            public void paintComponent(Graphics g){
+                g.drawImage(iMenu,0,0,getWidth(),getHeight(),this);
+            }
+        };
+        escritorioH.setPreferredSize(new java.awt.Dimension(1280, 720));
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         tfNroHabitacion = new javax.swing.JTextField();
-        bNuevo = new javax.swing.JButton();
-        bGuardar = new javax.swing.JButton();
-        bEliminar = new javax.swing.JButton();
-        bSalir = new javax.swing.JButton();
         bBuscar = new javax.swing.JButton();
+        bGuardar = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         cbTH = new javax.swing.JComboBox<>();
+        bNuevo = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tHabitacion = new javax.swing.JTable();
-        jEstado = new javax.swing.JLabel();
+        bEliminar = new javax.swing.JButton();
+        bSalir = new javax.swing.JButton();
         jrEstado = new javax.swing.JRadioButton();
+        jEstado = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Sitka Small", 0, 24)); // NOI18N
         jLabel1.setText("Gestion habitacion.");
 
         jLabel2.setFont(new java.awt.Font("Sitka Small", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Numero de Habitacion:");
 
-        jLabel3.setFont(new java.awt.Font("Sitka Small", 0, 14)); // NOI18N
-        jLabel3.setText("Tipo de Habitacion:");
-
-        bNuevo.setText("Limpiar");
-        bNuevo.addActionListener(new java.awt.event.ActionListener() {
+        bBuscar.setText("Buscar");
+        bBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bNuevoActionPerformed(evt);
+                bBuscarActionPerformed(evt);
             }
         });
 
@@ -85,24 +94,14 @@ public class GestionHabitacion extends javax.swing.JInternalFrame {
             }
         });
 
-        bEliminar.setText("Eliminar");
-        bEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bEliminarActionPerformed(evt);
-            }
-        });
+        jLabel3.setFont(new java.awt.Font("Sitka Small", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Tipo de Habitacion:");
 
-        bSalir.setText("Salir");
-        bSalir.addActionListener(new java.awt.event.ActionListener() {
+        bNuevo.setText("Limpiar");
+        bNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bSalirActionPerformed(evt);
-            }
-        });
-
-        bBuscar.setText("Buscar");
-        bBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bBuscarActionPerformed(evt);
+                bNuevoActionPerformed(evt);
             }
         });
 
@@ -119,82 +118,123 @@ public class GestionHabitacion extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(tHabitacion);
 
-        jEstado.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
-        jEstado.setText("Estado");
+        bEliminar.setText("Eliminar");
+        bEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bEliminarActionPerformed(evt);
+            }
+        });
+
+        bSalir.setText("Salir");
+        bSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bSalirActionPerformed(evt);
+            }
+        });
 
         jrEstado.setText("Ocupado/Desocupado");
+
+        jEstado.setFont(new java.awt.Font("Sitka Text", 0, 14)); // NOI18N
+        jEstado.setText("Estado:");
+
+        escritorioH.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioH.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioH.setLayer(tfNroHabitacion, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioH.setLayer(bBuscar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioH.setLayer(bGuardar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioH.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioH.setLayer(cbTH, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioH.setLayer(bNuevo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioH.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioH.setLayer(bEliminar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioH.setLayer(bSalir, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioH.setLayer(jrEstado, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioH.setLayer(jEstado, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout escritorioHLayout = new javax.swing.GroupLayout(escritorioH);
+        escritorioH.setLayout(escritorioHLayout);
+        escritorioHLayout.setHorizontalGroup(
+            escritorioHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, escritorioHLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(497, 497, 497))
+            .addGroup(escritorioHLayout.createSequentialGroup()
+                .addGap(135, 135, 135)
+                .addGroup(escritorioHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(escritorioHLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1049, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(78, Short.MAX_VALUE))
+                    .addGroup(escritorioHLayout.createSequentialGroup()
+                        .addGroup(escritorioHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(escritorioHLayout.createSequentialGroup()
+                                .addGap(120, 120, 120)
+                                .addComponent(jEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jrEstado)
+                                .addGap(51, 51, 51)
+                                .addComponent(bGuardar)
+                                .addGap(72, 72, 72)
+                                .addComponent(bNuevo)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(escritorioHLayout.createSequentialGroup()
+                                .addGap(51, 51, 51)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(tfNroHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(bBuscar)
+                                .addGap(84, 84, 84)
+                                .addComponent(jLabel3)))
+                        .addGap(18, 18, 18)
+                        .addGroup(escritorioHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(escritorioHLayout.createSequentialGroup()
+                                .addComponent(bEliminar)
+                                .addGap(62, 62, 62)
+                                .addComponent(bSalir))
+                            .addGroup(escritorioHLayout.createSequentialGroup()
+                                .addGap(9, 9, 9)
+                                .addComponent(cbTH, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(145, 145, 145))))
+        );
+        escritorioHLayout.setVerticalGroup(
+            escritorioHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(escritorioHLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jLabel1)
+                .addGap(32, 32, 32)
+                .addGroup(escritorioHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(cbTH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bBuscar)
+                    .addComponent(tfNroHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addGroup(escritorioHLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jEstado)
+                    .addComponent(jrEstado)
+                    .addComponent(bGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bNuevo)
+                    .addComponent(bEliminar)
+                    .addComponent(bSalir))
+                .addGap(50, 50, 50)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(99, 99, 99)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 856, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(bSalir)
-                            .addComponent(bNuevo)
-                            .addComponent(bEliminar))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(18, 18, 18)
-                                .addComponent(tfNroHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(73, 73, 73)
-                                .addComponent(jrEstado)
-                                .addGap(144, 144, 144)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(bGuardar)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(bBuscar)
-                                .addGap(62, 62, 62)
-                                .addComponent(jLabel3)
-                                .addGap(18, 18, 18)
-                                .addComponent(cbTH, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(327, 327, 327))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(492, 492, 492)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(escritorioH))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(49, 49, 49)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(tfNroHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bBuscar)
-                    .addComponent(jLabel3)
-                    .addComponent(cbTH, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jrEstado))
-                        .addGap(17, 17, 17))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(bGuardar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(bNuevo)
-                        .addGap(34, 34, 34)
-                        .addComponent(bEliminar)
-                        .addGap(34, 34, 34)
-                        .addComponent(bSalir))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(178, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(escritorioH))
         );
 
         pack();
@@ -299,6 +339,7 @@ public class GestionHabitacion extends javax.swing.JInternalFrame {
     private javax.swing.JButton bNuevo;
     private javax.swing.JButton bSalir;
     private javax.swing.JComboBox<String> cbTH;
+    private javax.swing.JDesktopPane escritorioH;
     private javax.swing.JLabel jEstado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
